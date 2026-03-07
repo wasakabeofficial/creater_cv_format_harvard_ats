@@ -1,5 +1,26 @@
+:root {
+  --font-main: "Times New Roman", Times, serif;
+  --font-alt: Arial, Helvetica, sans-serif;
+  --fs-name: 16pt;
+  --fs-header: 12pt;
+  --fs-body: 10pt;
+  --color-black: #000000;
+  --color-dark-gray: #333333;
+  --color-border: #000000;
+  --color-bg-app: #f4f4f4;
+  --color-white: #ffffff;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg-app);
+  color: var(--color-black);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
