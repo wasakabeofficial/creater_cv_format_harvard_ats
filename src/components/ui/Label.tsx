@@ -1,12 +1,5 @@
 import "../../assets/styles/Label.css";
-
-interface LabelProps {
-  text: string;
-  htmlFor: string;
-  required?: boolean;
-  className?: string;
-}
-
+import type { LabelProps } from "../../types/Label.type";
 const Label = ({
   text,
   htmlFor,
