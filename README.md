@@ -35,3 +35,18 @@ The design adheres to the strictest academic and professional guidelines:
    ```bash
    git clone git@github.com:wasakabeofficial/creater_cv_format_harvard_ats.git
    ```
+
+## 🏗️ Architecture
+
+The project follows a **Feature-Based Architecture**, organized to maintain a strict separation between data logic and the Harvard visual standard:
+
+- **Modular Design:** Each core functionality (Editor, Preview, PDF Generation) is isolated, making the code easier to maintain and test.
+- **Unidirectional Data Flow:** Data flows from the `Editor` to the `App` state, and then to the `Preview`, ensuring that the "Zero-Data" policy is easy to manage from a single source of truth.
+- **Clean Logic:** Utilities for date formatting and PDF styling are decoupled from the UI components to ensure the Harvard format remains consistent.
+
+### 📂 Directory Structure
+
+- `src/features/`: Contains the core logic for the CV Editor and the Harvard Preview.
+- `src/types/`: Centralized TypeScript interfaces to ensure data integrity.
+- `src/hooks/`: Custom hooks for managing the volatile state without persistence.
+- `src/utils/`: Pure functions for PDF rendering and ATS-friendly formatting.
