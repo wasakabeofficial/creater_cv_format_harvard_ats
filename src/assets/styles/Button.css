@@ -1,0 +1,54 @@
+.custom-button {
+  padding: 0.6rem 1.2rem;
+  font-family: var(--font-alt);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid transparent;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-button:disabled {
+  background-color: #e0e0e0;
+  color: #9e9e9e;
+  cursor: not-allowed;
+  border-color: #d1d1d1;
+}
+
+.button-primary {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.button-primary:hover:not(:disabled) {
+  background-color: #333333;
+}
+
+.button-secondary {
+  background-color: transparent;
+  border-color: var(--color-black);
+  color: var(--color-black);
+}
+
+.button-secondary:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.button-danger {
+  background-color: #ffffff;
+  border-color: #d93025;
+  color: #d93025;
+}
+
+.button-danger:hover:not(:disabled) {
+  background-color: #d93025;
+  color: #ffffff;
+}
+
+.button-full-width {
+  width: 100%;
+}

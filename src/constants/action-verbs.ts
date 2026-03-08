@@ -1,0 +1,47 @@
+import {
+  LEADERSHIP_VERBS_ENGLISH,
+  TECHNICAL_VERBS_ENGLISH,
+  COMMUNICATION_VERBS_ENGLISH,
+  CREATIVE_VERBS_ENGLISH,
+  HARVARD_ACTION_VERBS_ENGLISH,
+} from "./action-verbs-english";
+
+import {
+  LEADERSHIP_VERBS_SPANISH,
+  TECHNICAL_VERBS_SPANISH,
+  COMMUNICATION_VERBS_SPANISH,
+  CREATIVE_VERBS_SPANISH,
+  HARVARD_ACTION_VERBS_SPANISH,
+} from "./action-verbs-spanish";
+
+export const WEAK_VERBS_TO_AVOID = [
+  "Did",
+  "Responsible for",
+  "Helped",
+  "Worked on",
+  "Participated in",
+  "Tried to",
+  "Assisted",
+  "Hice",
+  "Responsable de",
+  "Ayudé",
+  "Trabajé en",
+  "Participé en",
+  "Intenté",
+  "Asistí",
+] as const;
+
+export const ALL_HARVARD_ACTION_VERBS = [
+  ...HARVARD_ACTION_VERBS_ENGLISH,
+  ...HARVARD_ACTION_VERBS_SPANISH,
+] as const;
+
+export const ACTION_VERBS_BY_CATEGORY = {
+  LEADERSHIP: [...LEADERSHIP_VERBS_ENGLISH, ...LEADERSHIP_VERBS_SPANISH],
+  TECHNICAL: [...TECHNICAL_VERBS_ENGLISH, ...TECHNICAL_VERBS_SPANISH],
+  COMMUNICATION: [
+    ...COMMUNICATION_VERBS_ENGLISH,
+    ...COMMUNICATION_VERBS_SPANISH,
+  ],
+  CREATIVE: [...CREATIVE_VERBS_ENGLISH, ...CREATIVE_VERBS_SPANISH],
+} as const;
