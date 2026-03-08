@@ -1,6 +1,5 @@
 import { PERSONAL_INFORMATION_TRANSLATIONS } from "../../../constants/ui-translations";
 import type { PersonalInformation } from "../../../types/cv/Personal.Information.type";
-import "../../../assets/styles/cv/PersonalInfoForm.css";
 import { Button, Input } from "../../ui";
 
 interface PersonalInformationFormProperties {
@@ -17,7 +16,6 @@ export const PersonalInfoForm = ({
   onNextStepAction,
 }: PersonalInformationFormProperties) => {
   const translations = PERSONAL_INFORMATION_TRANSLATIONS[language];
-
   const isInformationComplete =
     data.fullName.trim() !== "" && data.email.trim() !== "";
 
@@ -27,8 +25,8 @@ export const PersonalInfoForm = ({
   };
 
   return (
-    <div className="personal-information-container">
-      <div className="personal-info-grid">
+    <div className="space-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Input
           id="personal-information-full-name"
           label={translations.fullNameLabel}
@@ -74,20 +72,16 @@ export const PersonalInfoForm = ({
         />
       </div>
 
-      <div
-        className="form-navigation-actions"
-        style={{
-          marginTop: "2rem",
-          display: "flex",
-          justifyContent: "flex-end",
-        }}
-      >
+      <div className="flex justify-end pt-6 border-t border-gray-100">
         <Button
           label={language === "es" ? "Siguiente: Educación" : "Next: Education"}
           onClick={onNextStepAction}
           disabled={!isInformationComplete}
           variant="primary"
-          className="next-step-button"
+          className={`
+            min-w-50 transition-all duration-300
+            ${!isInformationComplete ? "grayscale opacity-50" : "hover:translate-x-1"}
+          `}
         />
       </div>
     </div>
