@@ -58,7 +58,6 @@ The system is built on a library of atomic and molecular components specifically
 - **`SectionCard`**: A structural container that groups related fields (Experience, Education) with collapsible capabilities to optimize the editor's workspace.
 - **`TextArea` (Harvard Optimized)**: An intelligent text editor that automatically inserts bullet points (`•`) and suggests **Action Verbs** in real-time to comply with professional standards.
 - **`DateField`**: A specialized input with a validation mask for `Month / Year` formats, ensuring the chronological consistency required by recruiters.
-- **`BulletInput`**: A hybrid component for the dynamic management of quantifiable achievements, facilitating the editing of complex lists.
 - **`DataGuard`**: A logical security component (_Headless_) that prevents accidental data loss when attempting to refresh or close the tab, protecting the **Zero-Persistence** policy.
 - **`Table`**: A management interface to quickly visualize and edit multiple data entries before the final generation.
 
@@ -94,7 +93,3 @@ Every user interface component has been developed under a **Test-Driven Developm
 - **Vitest**: For high-speed unit test execution.
 - **React Testing Library**: To validate user behavior (e.g., bullet point insertion upon pressing Enter).
 - **Strict Typing**: Utilization of TypeScript interfaces to ensure zero data errors between the Editor and the PDF Generation.
-
----
-
-**Would you like me to help you draft the "Action Verbs" section next, or should we move on to the next specific adjustment you mentioned?**
