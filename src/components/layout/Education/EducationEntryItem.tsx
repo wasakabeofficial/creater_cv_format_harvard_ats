@@ -28,7 +28,7 @@ export const EducationEntryItem = ({
   };
 
   return (
-    <div className="group relative border-b border-gray-100 pb-8 mb-8 last:border-0 last:pb-0 last:mb-0">
+    <div className="group relative border-b border-gray-100 pb-8 mb-8 last:border-0 last:pb-0 last:mb-0 animate-in fade-in slide-in-from-top-2">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
         <Input
           id={`education-institution-${index}`}
@@ -70,6 +70,7 @@ export const EducationEntryItem = ({
           onChange={handleInputChange}
           placeholder={translations.locationPlaceholder}
           validationType="alphanumeric"
+          required
         />
 
         <DateField
@@ -79,6 +80,7 @@ export const EducationEntryItem = ({
           value={entry.startDate}
           onChange={handleInputChange}
           placeholder={translations.startDatePlaceholder}
+          required
         />
 
         <DateField
@@ -88,16 +90,20 @@ export const EducationEntryItem = ({
           value={entry.endDate}
           onChange={handleInputChange}
           placeholder={translations.endDatePlaceholder}
+          required
         />
       </div>
 
       <div className="flex justify-end mt-4">
         <Button
-          label={language === "es" ? "Eliminar Entrada" : "Remove Entry"}
           onClick={() => onRemove(entry.id)}
-          variant="secondary"
-          className="text-red-500 border-red-100 hover:bg-red-50 hover:border-red-200 text-xs py-1.5"
-        />
+          label=""
+          type="button"
+          variant="outline"
+          className="text-red-500 border-red-100 hover:bg-red-50 hover:border-red-200 text-xs py-1.5 flex items-center gap-2 group"
+        >
+          <span>{language === "es" ? "Eliminar Entrada" : "Remove Entry"}</span>
+        </Button>
       </div>
     </div>
   );

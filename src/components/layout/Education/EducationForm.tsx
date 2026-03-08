@@ -25,6 +25,17 @@ export const EducationForm = ({
 }: EducationFormProps) => {
   const translations = EDUCATION_TRANSLATIONS[language];
 
+  const isEducationComplete =
+    educationData.length > 0 &&
+    educationData.every(
+      (entry) =>
+        entry.institution.trim() !== "" &&
+        entry.degree.trim() !== "" &&
+        entry.location.trim() !== "" &&
+        entry.startDate.trim() !== "" &&
+        entry.endDate.trim() !== "",
+    );
+
   return (
     <div className="flex flex-col">
       <div className="space-y-4">
@@ -50,7 +61,7 @@ export const EducationForm = ({
           }
           onClick={onAddEducation}
           variant="secondary"
-          className="border-dashed border-2 hover:border-solid hover:bg-gray-50 transition-all py-4"
+          className="border-dashed border-2 hover:border-solid hover:bg-gray-50 transition-all py-4 text-gray-600"
         />
 
         <div className="flex justify-end pt-6 border-t border-gray-100">
@@ -61,8 +72,16 @@ export const EducationForm = ({
                 : "Next: Work Experience"
             }
             onClick={onNextStepAction}
+            disabled={!isEducationComplete}
             variant="primary"
-            className="min-w-60 shadow-md hover:shadow-lg transition-shadow"
+            className={`
+              min-w-60 transition-all duration-300
+              ${
+                !isEducationComplete
+                  ? "grayscale opacity-50 cursor-not-allowed"
+                  : "shadow-md hover:shadow-lg hover:translate-x-1"
+              }
+            `}
           />
         </div>
       </div>
