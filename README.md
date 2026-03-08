@@ -50,3 +50,51 @@ The project follows a **Feature-Based Architecture**, organized to maintain a st
 - `src/types/`: Centralized TypeScript interfaces to ensure data integrity.
 - `src/hooks/`: Custom hooks for managing the volatile state without persistence.
 - `src/utils/`: Pure functions for PDF rendering and ATS-friendly formatting.
+
+### 🧱 Interface Components (Design Library)
+
+The system is built on a library of atomic and molecular components specifically designed for high-performance resume editing, following a strict rule of **explicit naming (no abbreviations)**:
+
+- **`SectionCard`**: A structural container that groups related fields (Experience, Education) with collapsible capabilities to optimize the editor's workspace.
+- **`TextArea` (Harvard Optimized)**: An intelligent text editor that automatically inserts bullet points (`•`) and suggests **Action Verbs** in real-time to comply with professional standards.
+- **`DateField`**: A specialized input with a validation mask for `Month / Year` formats, ensuring the chronological consistency required by recruiters.
+- **`BulletInput`**: A hybrid component for the dynamic management of quantifiable achievements, facilitating the editing of complex lists.
+- **`DataGuard`**: A logical security component (_Headless_) that prevents accidental data loss when attempting to refresh or close the tab, protecting the **Zero-Persistence** policy.
+- **`Table`**: A management interface to quickly visualize and edit multiple data entries before the final generation.
+
+### 📂 Updated Directory Structure
+
+```text
+src/
+├── components/
+│   ├── ui/                 # Reusable atomic components
+│   │   ├── Button/         # Buttons with variants (Primary, Danger)
+│   │   ├── Input/          # Inputs with type validation
+│   │   ├── TextArea/       # Editor with bullet and verb logic
+│   │   ├── SectionCard/    # Resume section containers
+│   │   └── ...             # DateField, Table, Alert, DataGuard , etc
+├── features/
+│   ├── editor/             # Input form logic
+│   └── preview/            # Real-time PDF rendering
+├── hooks/
+├── test/
+├── utils/
+├── types/
+│   └── ui/            # Complete interface definitions
+└── assets/
+    └── styles/             # CSS variables and global reset
+    └── images/
+
+```
+
+### 🧪 Quality and Testing
+
+Every user interface component has been developed under a **Test-Driven Development (TDD)** methodology using:
+
+- **Vitest**: For high-speed unit test execution.
+- **React Testing Library**: To validate user behavior (e.g., bullet point insertion upon pressing Enter).
+- **Strict Typing**: Utilization of TypeScript interfaces to ensure zero data errors between the Editor and the PDF Generation.
+
+---
+
+**Would you like me to help you draft the "Action Verbs" section next, or should we move on to the next specific adjustment you mentioned?**
