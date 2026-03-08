@@ -3,6 +3,15 @@ import type { EducationEntry } from "../../../types/cv/Education.type";
 import { Input, Button } from "../../ui";
 import DateField from "../../ui/DateField";
 
+interface EducationEntryItemProps {
+  entry: EducationEntry;
+  index: number;
+  translations: any;
+  onEntryChange: (id: string, updatedEntry: Partial<EducationEntry>) => void;
+  onRemove: (id: string) => void;
+  language: "en" | "es";
+}
+
 export const EducationEntryItem = ({
   entry,
   index,
@@ -10,29 +19,17 @@ export const EducationEntryItem = ({
   onEntryChange,
   onRemove,
   language,
-}: {
-  entry: EducationEntry;
-  index: number;
-  translations: any;
-  onEntryChange: (id: string, updatedEntry: Partial<EducationEntry>) => void;
-  onRemove: (id: string) => void;
-  language: "en" | "es";
-}) => {
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+}: EducationEntryItemProps) => {
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = event.target;
     onEntryChange(entry.id, { [name]: value });
   };
 
   return (
-    <div
-      className="education-entry-card"
-      style={{
-        marginBottom: "1.5rem",
-        paddingBottom: "1rem",
-        borderBottom: "1px solid #eee",
-      }}
-    >
-      <div className="personal-info-grid">
+    <div className="group relative border-b border-gray-100 pb-8 mb-8 last:border-0 last:pb-0 last:mb-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
         <Input
           id={`education-institution-${index}`}
           label={translations.institutionLabel}
@@ -43,6 +40,7 @@ export const EducationEntryItem = ({
           validationType="alphanumeric"
           required
         />
+
         <Input
           id={`education-degree-${index}`}
           label={translations.degreeLabel}
@@ -53,6 +51,7 @@ export const EducationEntryItem = ({
           validationType="alphanumeric"
           required
         />
+
         <Input
           id={`education-field-of-study-${index}`}
           label={translations.fieldOfStudyLabel}
@@ -62,22 +61,7 @@ export const EducationEntryItem = ({
           placeholder={translations.fieldOfStudyPlaceholder}
           validationType="alphanumeric"
         />
-        <DateField
-          id={`education-start-date-${index}`}
-          label={translations.startDateLabel}
-          name="startDate"
-          value={entry.startDate}
-          onChange={handleInputChange}
-          placeholder={translations.startDatePlaceholder}
-        />
-        <DateField
-          id={`education-end-date-${index}`}
-          label={translations.endDateLabel}
-          name="endDate"
-          value={entry.endDate}
-          onChange={handleInputChange}
-          placeholder={translations.endDatePlaceholder}
-        />
+
         <Input
           id={`education-location-${index}`}
           label={translations.locationLabel}
@@ -87,13 +71,32 @@ export const EducationEntryItem = ({
           placeholder={translations.locationPlaceholder}
           validationType="alphanumeric"
         />
+
+        <DateField
+          id={`education-start-date-${index}`}
+          label={translations.startDateLabel}
+          name="startDate"
+          value={entry.startDate}
+          onChange={handleInputChange}
+          placeholder={translations.startDatePlaceholder}
+        />
+
+        <DateField
+          id={`education-end-date-${index}`}
+          label={translations.endDateLabel}
+          name="endDate"
+          value={entry.endDate}
+          onChange={handleInputChange}
+          placeholder={translations.endDatePlaceholder}
+        />
       </div>
-      <div className="entry-actions" style={{ marginTop: "1rem" }}>
+
+      <div className="flex justify-end mt-4">
         <Button
-          label={language === "es" ? "Eliminar" : "Remove"}
+          label={language === "es" ? "Eliminar Entrada" : "Remove Entry"}
           onClick={() => onRemove(entry.id)}
           variant="secondary"
-          className="remove-education-button"
+          className="text-red-500 border-red-100 hover:bg-red-50 hover:border-red-200 text-xs py-1.5"
         />
       </div>
     </div>

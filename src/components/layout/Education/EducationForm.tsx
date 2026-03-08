@@ -26,28 +26,22 @@ export const EducationForm = ({
   const translations = EDUCATION_TRANSLATIONS[language];
 
   return (
-    <div className="education-form-container">
-      {educationData.map((entry, index) => (
-        <EducationEntryItem
-          key={entry.id}
-          entry={entry}
-          index={index}
-          translations={translations}
-          onEntryChange={onEducationChange}
-          onRemove={onRemoveEducation}
-          language={language}
-        />
-      ))}
+    <div className="flex flex-col">
+      <div className="space-y-4">
+        {educationData.map((entry, index) => (
+          <EducationEntryItem
+            key={entry.id}
+            entry={entry}
+            index={index}
+            translations={translations}
+            onEntryChange={onEducationChange}
+            onRemove={onRemoveEducation}
+            language={language}
+          />
+        ))}
+      </div>
 
-      <div
-        className="education-actions"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-          marginTop: "1rem",
-        }}
-      >
+      <div className="mt-10 flex flex-col gap-6">
         <Button
           label={
             language === "es"
@@ -56,15 +50,10 @@ export const EducationForm = ({
           }
           onClick={onAddEducation}
           variant="secondary"
+          className="border-dashed border-2 hover:border-solid hover:bg-gray-50 transition-all py-4"
         />
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            marginTop: "1rem",
-          }}
-        >
+        <div className="flex justify-end pt-6 border-t border-gray-100">
           <Button
             label={
               language === "es"
@@ -73,6 +62,7 @@ export const EducationForm = ({
             }
             onClick={onNextStepAction}
             variant="primary"
+            className="min-w-60 shadow-md hover:shadow-lg transition-shadow"
           />
         </div>
       </div>
