@@ -3,3 +3,7 @@ export interface SkillGroup {
   category: string;
   skills: string[];
 }
+export interface SkillsData {
+  groups: SkillGroup[];
+  interests: string;
+}

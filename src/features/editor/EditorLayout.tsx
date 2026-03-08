@@ -6,6 +6,7 @@ import { WorkExperienceForm } from "../../components/layout/Work/WorkExperienceF
 import { useCurriculumVitae } from "../../hooks/useCurriculumVitae";
 import { EDITOR_TRANSLATIONS } from "../../constants/ui-translations";
 import "../../assets/styles/cv/EditorLayout.css";
+import { SkillGroupForm } from "../../components/layout/Skill/SkillGroupForm";
 
 type SelectedLanguage = "en" | "es" | null;
 
@@ -19,6 +20,10 @@ export const EditorLayout = () => {
     updateWorkExperience,
     addWorkExperience,
     removeWorkExperience,
+    addSkillGroup,
+    updateSkillGroup,
+    removeSkillGroup,
+    updateSkillsInGroup,
     isDirty,
   } = useCurriculumVitae();
 
@@ -26,7 +31,7 @@ export const EditorLayout = () => {
     useState<SelectedLanguage>(null);
   const [isEducationUnlocked, setIsEducationUnlocked] = useState(false);
   const [isWorkUnlocked, setIsWorkUnlocked] = useState(false);
-  const [, setIsSkillsUnlocked] = useState(false);
+  const [isSkillsUnlocked, setIsSkillsUnlocked] = useState(false);
 
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -61,6 +66,17 @@ export const EditorLayout = () => {
         endDate: "",
         description: "",
         highlights: [],
+      });
+    }
+  };
+
+  const handleNextToSkills = () => {
+    setIsSkillsUnlocked(true);
+    if (cvData.skillGroups.length === 0) {
+      addSkillGroup({
+        id: crypto.randomUUID(),
+        category: "",
+        skills: [],
       });
     }
   };
@@ -179,12 +195,46 @@ export const EditorLayout = () => {
                   })
                 }
                 language={selectedLanguage ?? "en"}
-                onNextStepAction={() => setIsSkillsUnlocked(true)}
+                onNextStepAction={handleNextToSkills}
               />
             ) : (
               <p className="placeholder-text">
                 {translations?.placeholder ??
                   "Please complete Education to continue..."}
+              </p>
+            )}
+          </div>
+        </SectionCard>
+
+        <SectionCard title={translations?.skills ?? "Skills & Competencies"}>
+          <div
+            className={
+              !isSkillsUnlocked || isEditorDisabled
+                ? "pointer-events-none opacity-50"
+                : ""
+            }
+          >
+            {isSkillsUnlocked ? (
+              <SkillGroupForm
+                skillGroups={cvData.skillGroups}
+                onGroupChange={updateSkillGroup}
+                onSkillsChange={updateSkillsInGroup}
+                onAddGroup={() =>
+                  addSkillGroup({
+                    id: crypto.randomUUID(),
+                    category: "",
+                    skills: [],
+                  })
+                }
+                onRemoveGroup={removeSkillGroup}
+                language={selectedLanguage ?? "en"}
+                onNextStepAction={() => alert("Ready to generate PDF!")}
+              />
+            ) : (
+              <p className="placeholder-text">
+                {selectedLanguage === "es"
+                  ? "Completa la experiencia laboral para continuar..."
+                  : "Complete Work Experience to continue..."}
               </p>
             )}
           </div>

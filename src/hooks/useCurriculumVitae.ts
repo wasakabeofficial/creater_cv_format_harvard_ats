@@ -106,6 +106,23 @@ export const useCurriculumVitae = () => {
     [],
   );
 
+  const updateSkillsInGroup = useCallback(
+    (id: string, skillsString: string) => {
+      const skillsArray = skillsString
+        .split(",")
+        .map((s) => s.trim())
+        .filter((s) => s !== "");
+
+      setCvData((prev) => ({
+        ...prev,
+        skillGroups: prev.skillGroups.map((group) =>
+          group.id === id ? { ...group, skills: skillsArray } : group,
+        ),
+      }));
+    },
+    [],
+  );
+
   const removeSkillGroup = useCallback((id: string) => {
     setCvData((prev) => ({
       ...prev,
@@ -113,6 +130,7 @@ export const useCurriculumVitae = () => {
     }));
   }, []);
 
+  // --- LANGUAGES ---
   const addLanguage = useCallback((language: LanguageEntry) => {
     setCvData((prev) => ({
       ...prev,
@@ -156,6 +174,7 @@ export const useCurriculumVitae = () => {
     addSkillGroup,
     updateSkillGroup,
     removeSkillGroup,
+    updateSkillsInGroup,
     addLanguage,
     updateLanguage,
     removeLanguage,
