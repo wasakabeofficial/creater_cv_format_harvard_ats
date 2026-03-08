@@ -2,10 +2,9 @@ import { useState } from "react";
 import { SectionCard, Title } from "../../components/ui";
 import { PersonalInfoForm } from "../../components/layout/Personal/PersonalInfoForm";
 import { EducationForm } from "../../components/layout/Education/EducationForm";
-import { WorkExperienceForm } from "../../components/layout/Work/WorkExperienceForm";
 import { useCurriculumVitae } from "../../hooks/useCurriculumVitae";
 import { EDITOR_TRANSLATIONS } from "../../constants/ui-translations";
-import "../../assets/styles/cv/EditorLayout.css";
+import { WorkExperienceForm } from "../../components/layout/Work/WorkExperienceForm";
 import { SkillGroupForm } from "../../components/layout/Skill/SkillGroupForm";
 
 type SelectedLanguage = "en" | "es" | null;
@@ -87,45 +86,54 @@ export const EditorLayout = () => {
     : null;
 
   return (
-    <div className="editor-container">
-      <header className="editor-header">
-        <div className="editor-title-group">
-          <Title
-            label="Harvard CV Editor"
-            level="h1"
-            className="editor-main-title"
-          />
-          <span className="editor-subtitle">Standard 2026 Edition</span>
-        </div>
-
-        <div className="editor-controls">
-          <div
-            className={`language-selector-container ${isEditorDisabled ? "highlight-pulse" : ""}`}
-          >
-            <span className="language-label">Select Language:</span>
-            <select
-              className="language-select-dropdown"
-              value={selectedLanguage ?? ""}
-              onChange={handleLanguageChange}
-            >
-              <option value="" disabled>
-                Choose...
-              </option>
-              <option value="en">English (Harvard Standard)</option>
-              <option value="es">Español (Equivalente Técnico)</option>
-            </select>
+    <div className="min-h-screen bg-gray-50 pb-20">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 px-6 py-4 mb-8">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex flex-col">
+            <Title
+              label="Harvard CV Editor"
+              level="h1"
+              className="text-2xl font-bold tracking-tight text-gray-900"
+            />
+            <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">
+              Standard 2026 Edition
+            </span>
           </div>
 
-          {isDirty && (
-            <div className="status-badge-container">
-              <span className="status-badge">Unsaved changes</span>
+          <div className="flex items-center gap-4">
+            <div
+              className={`flex items-center gap-3 bg-gray-100 p-1.5 rounded-lg transition-all ${isEditorDisabled ? "ring-2 ring-blue-400 animate-pulse" : ""}`}
+            >
+              <span className="text-xs font-bold text-gray-600 ml-2">
+                LANG:
+              </span>
+              <select
+                className="bg-white border-none text-sm font-medium rounded-md px-3 py-1.5 focus:ring-0 cursor-pointer shadow-sm"
+                value={selectedLanguage ?? ""}
+                onChange={handleLanguageChange}
+              >
+                <option value="" disabled>
+                  Choose...
+                </option>
+                <option value="en">English (Harvard)</option>
+                <option value="es">Español (Técnico)</option>
+              </select>
             </div>
-          )}
+
+            {isDirty && (
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-full animate-fade-in">
+                <div className="w-2 h-2 bg-amber-500 rounded-full animate-ping" />
+                <span className="text-[10px] font-bold text-amber-700 uppercase italic">
+                  Unsaved
+                </span>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
       <main
-        className={`editor-sections ${isEditorDisabled ? "sections-disabled" : ""}`}
+        className={`max-w-4xl mx-auto px-4 space-y-10 transition-opacity duration-500 ${isEditorDisabled ? "opacity-40 grayscale" : "opacity-100"}`}
       >
         <SectionCard
           title={translations?.personalInformation ?? "Personal Information"}
@@ -144,8 +152,8 @@ export const EditorLayout = () => {
           <div
             className={
               !isEducationUnlocked || isEditorDisabled
-                ? "pointer-events-none opacity-50"
-                : ""
+                ? "pointer-events-none opacity-40 grayscale-[0.5]"
+                : "transition-all duration-500"
             }
           >
             <EducationForm
@@ -173,8 +181,8 @@ export const EditorLayout = () => {
           <div
             className={
               !isWorkUnlocked || isEditorDisabled
-                ? "pointer-events-none opacity-50"
-                : ""
+                ? "pointer-events-none opacity-40"
+                : "transition-all duration-500"
             }
           >
             {isWorkUnlocked ? (
@@ -198,10 +206,12 @@ export const EditorLayout = () => {
                 onNextStepAction={handleNextToSkills}
               />
             ) : (
-              <p className="placeholder-text">
-                {translations?.placeholder ??
-                  "Please complete Education to continue..."}
-              </p>
+              <div className="py-8 text-center border-2 border-dashed border-gray-100 rounded-xl">
+                <p className="text-sm text-gray-400 italic">
+                  {translations?.placeholder ??
+                    "Please complete Education to continue..."}
+                </p>
+              </div>
             )}
           </div>
         </SectionCard>
@@ -210,8 +220,8 @@ export const EditorLayout = () => {
           <div
             className={
               !isSkillsUnlocked || isEditorDisabled
-                ? "pointer-events-none opacity-50"
-                : ""
+                ? "pointer-events-none opacity-40"
+                : "transition-all duration-500"
             }
           >
             {isSkillsUnlocked ? (
@@ -228,14 +238,18 @@ export const EditorLayout = () => {
                 }
                 onRemoveGroup={removeSkillGroup}
                 language={selectedLanguage ?? "en"}
-                onNextStepAction={() => alert("Ready to generate PDF!")}
+                onNextStepAction={() =>
+                  alert("🎉 Ready to generate your WASAKABE PDF!")
+                }
               />
             ) : (
-              <p className="placeholder-text">
-                {selectedLanguage === "es"
-                  ? "Completa la experiencia laboral para continuar..."
-                  : "Complete Work Experience to continue..."}
-              </p>
+              <div className="py-8 text-center border-2 border-dashed border-gray-100 rounded-xl">
+                <p className="text-sm text-gray-400 italic">
+                  {selectedLanguage === "es"
+                    ? "Completa la experiencia laboral para continuar..."
+                    : "Complete Work Experience to continue..."}
+                </p>
+              </div>
             )}
           </div>
         </SectionCard>
