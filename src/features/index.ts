@@ -1,3 +1,3 @@
 import { EditorLayout } from "./editor/EditorLayout";
-
-export { EditorLayout };
+import { PreviewLayout } from "./preview/PreviewLayout";
+export { EditorLayout, PreviewLayout };
