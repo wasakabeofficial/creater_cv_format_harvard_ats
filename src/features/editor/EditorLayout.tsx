@@ -2,10 +2,12 @@ import { useState } from "react";
 import { SectionCard, Title } from "../../components/ui";
 import { PersonalInfoForm } from "../../components/layout/Personal/PersonalInfoForm";
 import { EducationForm } from "../../components/layout/Education/EducationForm";
-import { useCurriculumVitae } from "../../hooks/useCurriculumVitae";
-import { EDITOR_TRANSLATIONS } from "../../constants/ui-translations";
 import { WorkExperienceForm } from "../../components/layout/Work/WorkExperienceForm";
 import { SkillGroupForm } from "../../components/layout/Skill/SkillGroupForm";
+
+import { useCurriculumVitae } from "../../hooks/useCurriculumVitae";
+import { EDITOR_TRANSLATIONS } from "../../constants/ui-translations";
+import { LanguageForm } from "../../components/layout/Languages/LanguageForm";
 
 type SelectedLanguage = "en" | "es" | null;
 
@@ -23,6 +25,9 @@ export const EditorLayout = () => {
     updateSkillGroup,
     removeSkillGroup,
     updateSkillsInGroup,
+    updateLanguage,
+    addLanguage,
+    removeLanguage,
     isDirty,
   } = useCurriculumVitae();
 
@@ -31,6 +36,7 @@ export const EditorLayout = () => {
   const [isEducationUnlocked, setIsEducationUnlocked] = useState(false);
   const [isWorkUnlocked, setIsWorkUnlocked] = useState(false);
   const [isSkillsUnlocked, setIsSkillsUnlocked] = useState(false);
+  const [isLanguagesUnlocked, setIsLanguagesUnlocked] = useState(false);
 
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -72,10 +78,17 @@ export const EditorLayout = () => {
   const handleNextToSkills = () => {
     setIsSkillsUnlocked(true);
     if (cvData.skillGroups.length === 0) {
-      addSkillGroup({
+      addSkillGroup({ id: crypto.randomUUID(), category: "", skills: [] });
+    }
+  };
+
+  const handleNextToLanguages = () => {
+    setIsLanguagesUnlocked(true);
+    if (cvData.languages.length === 0) {
+      addLanguage({
         id: crypto.randomUUID(),
-        category: "",
-        skills: [],
+        language: "",
+        proficiency: "Limited Working",
       });
     }
   };
@@ -86,7 +99,7 @@ export const EditorLayout = () => {
     : null;
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-gray-50 pb-20 font-sans">
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 px-6 py-4 mb-8">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex flex-col">
@@ -208,8 +221,8 @@ export const EditorLayout = () => {
             ) : (
               <div className="py-8 text-center border-2 border-dashed border-gray-100 rounded-xl">
                 <p className="text-sm text-gray-400 italic">
-                  {translations?.placeholder ??
-                    "Please complete Education to continue..."}
+                  {translations?.placeholderWork ??
+                    "Complete Education to continue..."}
                 </p>
               </div>
             )}
@@ -238,6 +251,41 @@ export const EditorLayout = () => {
                 }
                 onRemoveGroup={removeSkillGroup}
                 language={selectedLanguage ?? "en"}
+                onNextStepAction={handleNextToLanguages}
+              />
+            ) : (
+              <div className="py-8 text-center border-2 border-dashed border-gray-100 rounded-xl">
+                <p className="text-sm text-gray-400 italic">
+                  {selectedLanguage === "es"
+                    ? "Completa la experiencia laboral para continuar..."
+                    : "Complete Work Experience to continue..."}
+                </p>
+              </div>
+            )}
+          </div>
+        </SectionCard>
+
+        <SectionCard title={translations?.languages ?? "Languages"}>
+          <div
+            className={
+              !isLanguagesUnlocked || isEditorDisabled
+                ? "pointer-events-none opacity-40"
+                : "transition-all duration-500"
+            }
+          >
+            {isLanguagesUnlocked ? (
+              <LanguageForm
+                languages={cvData.languages}
+                onLanguageChange={updateLanguage}
+                onAddLanguage={() =>
+                  addLanguage({
+                    id: crypto.randomUUID(),
+                    language: "",
+                    proficiency: "Limited Working",
+                  })
+                }
+                onRemoveLanguage={removeLanguage}
+                language={selectedLanguage ?? "en"}
                 onNextStepAction={() =>
                   alert("🎉 Ready to generate your WASAKABE PDF!")
                 }
@@ -246,8 +294,8 @@ export const EditorLayout = () => {
               <div className="py-8 text-center border-2 border-dashed border-gray-100 rounded-xl">
                 <p className="text-sm text-gray-400 italic">
                   {selectedLanguage === "es"
-                    ? "Completa la experiencia laboral para continuar..."
-                    : "Complete Work Experience to continue..."}
+                    ? "Completa las habilidades para continuar..."
+                    : "Complete Skills to continue..."}
                 </p>
               </div>
             )}

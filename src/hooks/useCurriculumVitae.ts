@@ -130,7 +130,6 @@ export const useCurriculumVitae = () => {
     }));
   }, []);
 
-  // --- LANGUAGES ---
   const addLanguage = useCallback((language: LanguageEntry) => {
     setCvData((prev) => ({
       ...prev,
