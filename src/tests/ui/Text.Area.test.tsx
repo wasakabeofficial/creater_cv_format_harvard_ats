@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { TextArea } from "../components/ui";
+import { TextArea } from "../../components/ui";
 
 describe("TextArea Component", () => {
   it("renders the label and character counter", () => {

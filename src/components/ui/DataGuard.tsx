@@ -10,7 +10,6 @@ const DataGuard = ({
       if (isDirty) {
         event.preventDefault();
         event.returnValue = customMessage;
-
         return customMessage;
       }
     };

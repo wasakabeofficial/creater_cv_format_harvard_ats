@@ -1,5 +1,5 @@
+import React from "react";
 import type { InputProps } from "../../types/ui/Input.type";
-import "../../assets/styles/Input.css";
 import Label from "./Label";
 
 const Input = ({
@@ -31,8 +31,14 @@ const Input = ({
   };
 
   return (
-    <div className="input-container">
-      <Label htmlFor={id} text={label} required={required} />
+    <div className="flex flex-col gap-1.5 w-full">
+      <Label
+        htmlFor={id}
+        text={label}
+        required={required}
+        className="text-sm font-medium text-gray-700"
+      />
+
       <input
         id={id}
         name={name}
@@ -41,8 +47,15 @@ const Input = ({
         value={value}
         onChange={handleChange}
         required={required}
-        className="custom-input"
         autoComplete="off"
+        className="
+          w-full px-3 py-2 
+          bg-white border border-gray-300 rounded-md shadow-sm
+          text-sm font-sans text-gray-900 placeholder-gray-400
+          focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent
+          disabled:bg-gray-50 disabled:text-gray-500
+          transition-all duration-200
+        "
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { DateField } from "../components/ui";
+import { DateField } from "../../components/ui";
 
 describe("DateField Component", () => {
   it("renders with the correct date placeholder", () => {
@@ -13,7 +13,7 @@ describe("DateField Component", () => {
         onChange={() => {}}
       />,
     );
-    expect(screen.getByPlaceholderText("MM / YYYY")).toBeDefined();
+    expect(screen.getByPlaceholderText("DD / MM / YYYY")).toBeDefined();
   });
 
   it("does not allow letters in the date field", () => {

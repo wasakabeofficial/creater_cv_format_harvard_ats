@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, act } from "@testing-library/react";
-import Alert from "../components/ui/Alert";
+import Alert from "../../components/ui/Alert";
 
 describe("Alert Component", () => {
   it("renders the message when isVisible is true", () => {

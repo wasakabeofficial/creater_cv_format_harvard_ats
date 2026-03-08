@@ -1,3 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Times New Roman", Times, serif;
+  --font-sans: Arial, Helvetica, sans-serif;
+
+  --text-name: 16pt;
+  --text-header: 12pt;
+  --text-body: 10pt;
+
+  --color-harvard-black: #000000;
+  --color-harvard-gray: #333333;
+}
+
 :root {
   --font-main: "Times New Roman", Times, serif;
   --font-alt: Arial, Helvetica, sans-serif;
@@ -11,16 +25,48 @@
   --color-white: #ffffff;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: var(--font-main);
+    background-color: var(--color-bg-app);
+    color: var(--color-black);
+    line-height: 1.5;
+    @apply antialiased;
+  }
+
+  .text-cv-name {
+    font-size: var(--fs-name);
+    font-weight: bold;
+  }
+  .text-cv-header {
+    font-size: var(--fs-header);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .text-cv-body {
+    font-size: var(--fs-body);
+  }
 }
 
-body {
-  font-family: var(--font-main);
-  background-color: var(--color-bg-app);
-  color: var(--color-black);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
+@layer utilities {
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out forwards;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
