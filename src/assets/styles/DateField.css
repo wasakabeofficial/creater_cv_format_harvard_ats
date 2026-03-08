@@ -1,8 +1,65 @@
 .date-field-container {
-  flex: 1;
-  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
 }
-.date-field-container .custom-input {
-  text-align: center;
-  letter-spacing: 1px;
+
+.date-field-label {
+  font-family:
+    "Inter",
+    -apple-system,
+    sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.required-mark {
+  color: #dc2626;
+  font-size: 1rem;
+}
+
+.date-field-input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: #1f2937;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+.date-field-input::placeholder {
+  color: #9ca3af;
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+.date-field-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  background-color: #f8fafc;
+}
+
+.date-field-input:hover:not(:focus) {
+  border-color: #9ca3af;
+}
+
+.date-field-input.error {
+  border-color: #ef4444;
+}
+
+@media (max-width: 640px) {
+  .date-field-input {
+    font-size: 16px;
+    padding: 0.75rem;
+  }
 }

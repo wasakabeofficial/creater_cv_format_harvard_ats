@@ -13,7 +13,7 @@ describe("DateField Component", () => {
         onChange={() => {}}
       />,
     );
-    expect(screen.getByPlaceholderText("MM / YYYY")).toBeDefined();
+    expect(screen.getByPlaceholderText("DD / MM / YYYY")).toBeDefined();
   });
 
   it("does not allow letters in the date field", () => {

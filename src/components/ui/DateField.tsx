@@ -1,6 +1,5 @@
 import type { DateFieldProps } from "../../types/ui/Date.type";
 import "../../assets/styles/DateField.css";
-import Input from "./Input";
 
 const DateField = ({
   label,
@@ -9,28 +8,70 @@ const DateField = ({
   onChange,
   required = false,
   id,
-  placeholder = "MM / YYYY",
+  placeholder = "DD / MM / YYYY",
 }: DateFieldProps) => {
-  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    const regexDate = /^[0-9/]*$/;
-    if (regexDate.test(inputValue)) {
-      onChange(event);
+  const formatExperienceDate = (inputValue: string) => {
+    const digits = inputValue.replace(/\D/g, "");
+
+    let formattedDate = "";
+    if (digits.length > 0) {
+      formattedDate = digits.substring(0, 2);
+      if (digits.length > 2) {
+        formattedDate += "/" + digits.substring(2, 4);
+      }
+      if (digits.length > 4) {
+        formattedDate += "/" + digits.substring(4, 8);
+      }
     }
+    return formattedDate;
   };
 
+  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = event.target.value;
+
+    const isDeleting =
+      (event.nativeEvent as InputEvent).inputType === "deleteContentBackward";
+
+    if (isDeleting) {
+      onChange(event);
+      return;
+    }
+
+    const formattedValue = formatExperienceDate(rawValue);
+
+    if (rawValue.length > 0 && formattedValue.length === 0) {
+      return;
+    }
+
+    const syntheticEvent = {
+      ...event,
+      target: {
+        ...event.target,
+        name,
+        value: formattedValue,
+      },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    onChange(syntheticEvent);
+  };
   return (
     <div className="date-field-container">
-      <Input
-        label={label}
-        name={name}
+      {label && (
+        <label htmlFor={id} className="date-field-label">
+          {label}
+          {required && <span className="required-mark">*</span>}
+        </label>
+      )}
+      <input
+        type="text"
         id={id}
+        name={name}
         value={value}
         onChange={handleDateChange}
-        required={required}
         placeholder={placeholder}
-        validationType="only-numbers"
-        type="text"
+        required={required}
+        maxLength={10}
+        className="date-field-input"
       />
     </div>
   );
