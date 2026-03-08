@@ -1,16 +1,28 @@
 import { useState } from "react";
-import { SectionCard, Title } from "../../components/ui"; // Importamos Title
+import { SectionCard, Title } from "../../components/ui";
 import { PersonalInfoForm } from "../../components/layout/PersonalInfoForm";
 import { useCurriculumVitae } from "../../hooks/useCurriculumVitae";
 import { EDITOR_TRANSLATIONS } from "../../constants/ui-translations";
 import "../../assets/styles/EditorLayout.css";
+import { EducationForm } from "../../components/layout/EducationForm";
 
 type SelectedLanguage = "en" | "es" | null;
 
 export const EditorLayout = () => {
-  const { cvData, updatePersonalInformation, isDirty } = useCurriculumVitae();
+  const {
+    cvData,
+    updatePersonalInformation,
+    updateEducation,
+    addEducation,
+    removeEducation,
+    addWorkExperience,
+    isDirty,
+  } = useCurriculumVitae();
+
   const [selectedLanguage, setSelectedLanguage] =
     useState<SelectedLanguage>(null);
+  const [isEducationUnlocked, setIsEducationUnlocked] = useState(false);
+  const [isWorkUnlocked, setIsWorkUnlocked] = useState(false);
 
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -18,8 +30,37 @@ export const EditorLayout = () => {
     setSelectedLanguage(event.target.value as SelectedLanguage);
   };
 
-  const isEditorDisabled = selectedLanguage === null;
+  const handleNextToEducation = () => {
+    setIsEducationUnlocked(true);
+    if (cvData.education.length === 0) {
+      addEducation({
+        id: crypto.randomUUID(),
+        institution: "",
+        location: "",
+        degree: "",
+        fieldOfStudy: "",
+        startDate: "",
+        endDate: "",
+      });
+    }
+  };
 
+  const handleNextToWork = () => {
+    setIsWorkUnlocked(true);
+    if (cvData.workExperience.length === 0) {
+      addWorkExperience({
+        id: crypto.randomUUID(),
+        company: "",
+        location: "",
+        jobTitle: "",
+        startDate: "",
+        endDate: "",
+        achievements: "",
+      });
+    }
+  };
+
+  const isEditorDisabled = selectedLanguage === null;
   const translations = selectedLanguage
     ? EDITOR_TRANSLATIONS[selectedLanguage]
     : null;
@@ -73,17 +114,57 @@ export const EditorLayout = () => {
               data={cvData.personalInformation}
               onChange={updatePersonalInformation}
               language={selectedLanguage ?? "en"}
+              onNextStepAction={handleNextToEducation}
+            />
+          </div>
+        </SectionCard>
+
+        <SectionCard title={translations?.education ?? "Education"}>
+          <div
+            className={
+              !isEducationUnlocked || isEditorDisabled
+                ? "pointer-events-none opacity-50"
+                : ""
+            }
+          >
+            <EducationForm
+              educationData={cvData.education}
+              onEducationChange={updateEducation}
+              onRemoveEducation={removeEducation}
+              onAddEducation={() =>
+                addEducation({
+                  id: crypto.randomUUID(),
+                  institution: "",
+                  location: "",
+                  degree: "",
+                  fieldOfStudy: "",
+                  startDate: "",
+                  endDate: "",
+                })
+              }
+              language={selectedLanguage ?? "en"}
+              onNextStepAction={handleNextToWork}
             />
           </div>
         </SectionCard>
 
         <SectionCard title={translations?.workExperience ?? "Work Experience"}>
-          <p className="placeholder-text">
-            {translations?.placeholder ??
-              "Please select a language to start writing..."}
-          </p>
+          <div
+            className={
+              !isWorkUnlocked || isEditorDisabled
+                ? "pointer-events-none opacity-50"
+                : ""
+            }
+          >
+            <p className="placeholder-text">
+              {translations?.placeholder ??
+                "Please complete Education to continue..."}
+            </p>
+          </div>
         </SectionCard>
       </main>
     </div>
   );
 };
+
+export default EditorLayout;
