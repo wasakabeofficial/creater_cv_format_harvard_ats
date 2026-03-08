@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { SectionCard, Title } from "../../components/ui";
-import { PersonalInfoForm } from "../../components/layout/PersonalInfoForm";
+import { PersonalInfoForm } from "../../components/layout/Personal/PersonalInfoForm";
 import { useCurriculumVitae } from "../../hooks/useCurriculumVitae";
 import { EDITOR_TRANSLATIONS } from "../../constants/ui-translations";
 import "../../assets/styles/cv/EditorLayout.css";
 import { EducationForm } from "../../components/layout/Education/EducationForm";
-
 
 type SelectedLanguage = "en" | "es" | null;
 
