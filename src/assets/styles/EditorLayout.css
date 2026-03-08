@@ -87,7 +87,7 @@
   font-size: 0.9rem;
   color: #94a3b8;
 }
-/* Estado deshabilitado de las secciones */
+
 .sections-disabled {
   opacity: 0.5;
   filter: grayscale(1);
@@ -98,21 +98,19 @@
 .pointer-events-none {
   pointer-events: none;
 }
-/* Ajuste para que el componente Title no choque con el subtítulo */
+
 .editor-main-title {
   margin: 0;
   line-height: 1.2;
 }
 
 .editor-subtitle {
-  display: block; /* Asegura que baje a la siguiente línea si es necesario */
+  display: block;
   margin-top: 0.25rem;
   font-size: 0.9rem;
   color: #94a3b8;
 }
 
-/* El resto del CSS se mantiene igual... */
-/* Animación para resaltar el selector cuando nada ha sido elegido */
 .highlight-pulse {
   border: 2px solid #3b82f6 !important;
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
