@@ -4,4 +4,5 @@ import Input from "./Input";
 import TextArea from "./TextArea";
 import DateField from "./DateField";
 import Button from "./Button";
-export { Title, Label, Input, TextArea, DateField, Button };
+import Table from "./Table";
+export { Title, Label, Input, TextArea, DateField, Button, Table };

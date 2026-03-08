@@ -1,0 +1,42 @@
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 1rem;
+  border: 1px solid #ececec;
+  border-radius: 8px;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-alt);
+  font-size: 14px;
+}
+
+.custom-table th {
+  background-color: #f9f9f9;
+  text-align: left;
+  padding: 12px;
+  border-bottom: 2px solid #ececec;
+  color: var(--color-dark-gray);
+  font-weight: 600;
+}
+
+.custom-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ececec;
+  vertical-align: middle;
+}
+
+.table-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.table-empty-message {
+  text-align: center;
+  color: var(--color-dark-gray);
+  font-family: var(--font-alt);
+  padding: 2rem;
+  font-style: italic;
+}
