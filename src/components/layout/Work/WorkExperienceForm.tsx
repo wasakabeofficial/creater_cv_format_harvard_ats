@@ -25,6 +25,16 @@ export const WorkExperienceForm = ({
 }: WorkExperienceFormProps) => {
   const translations = WORK_TRANSLATIONS[language];
 
+  const isWorkExperienceValid = workData.every(
+    (entry) =>
+      entry.company.trim() !== "" &&
+      entry.position.trim() !== "" &&
+      entry.startDate.trim() !== "" &&
+      entry.endDate.trim() !== "" &&
+      entry.location.trim() !== "" &&
+      entry.description.trim() !== "",
+  );
+
   return (
     <div className="flex flex-col gap-8">
       <div className="space-y-6">
@@ -49,7 +59,7 @@ export const WorkExperienceForm = ({
           onClick={onAddWork}
           variant="secondary"
           fullWidth
-          className="border-dashed border-2 py-4 bg-gray-50/50 hover:bg-white hover:border-black transition-all"
+          className="border-dashed border-2 py-4 bg-gray-50/50 hover:bg-white hover:border-black transition-all text-gray-600"
         />
 
         <div className="flex justify-end pt-6 border-t border-gray-100">
@@ -58,8 +68,16 @@ export const WorkExperienceForm = ({
               language === "es" ? "Siguiente: Habilidades" : "Next: Skills"
             }
             onClick={onNextStepAction}
+            disabled={!isWorkExperienceValid}
             variant="primary"
-            className="min-w-55 shadow-sm hover:shadow-md active:scale-95 transition-all"
+            className={`
+              min-w-60 transition-all duration-300
+              ${
+                !isWorkExperienceValid
+                  ? "grayscale opacity-50 cursor-not-allowed"
+                  : "shadow-md hover:shadow-lg active:scale-95 hover:translate-x-1"
+              }
+            `}
           />
         </div>
       </div>

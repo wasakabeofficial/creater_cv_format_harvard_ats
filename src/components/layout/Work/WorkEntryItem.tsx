@@ -27,7 +27,7 @@ export const WorkEntryItem = ({
   };
 
   return (
-    <div className="group relative bg-white border border-gray-200 rounded-xl p-6 mb-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+    <div className="group relative bg-white border border-gray-200 rounded-xl p-6 mb-8 shadow-sm hover:shadow-md transition-shadow duration-300 animate-in fade-in slide-in-from-bottom-2">
       <div className="absolute -left-3 -top-3 bg-black text-white w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shadow-lg">
         {index + 1}
       </div>
@@ -58,6 +58,7 @@ export const WorkEntryItem = ({
           value={entry.startDate}
           onChange={handleInputChange}
           placeholder="MM / YYYY"
+          required
         />
         <DateField
           id={`work-end-${index}`}
@@ -66,6 +67,7 @@ export const WorkEntryItem = ({
           value={entry.endDate}
           onChange={handleInputChange}
           placeholder="MM / YYYY"
+          required
         />
         <div className="md:col-span-2">
           <Input
@@ -75,6 +77,7 @@ export const WorkEntryItem = ({
             value={entry.location}
             onChange={handleInputChange}
             placeholder="e.g. Mountain View, CA"
+            required
           />
         </div>
       </div>
@@ -89,16 +92,21 @@ export const WorkEntryItem = ({
           placeholder={translations.descriptionPlaceholder}
           enableHarvardOptimization={true}
           rows={6}
+          required
         />
       </div>
 
       <div className="mt-6 flex justify-end">
         <Button
-          label={language === "es" ? "Eliminar Puesto" : "Remove Position"}
           onClick={() => onRemove(entry.id)}
+          label=""
           variant="secondary"
-          className="text-red-500 border-red-100 hover:bg-red-50 hover:border-red-200"
-        />
+          className="text-red-500 border-red-100 hover:bg-red-50 hover:border-red-200 text-xs py-1.5"
+        >
+          <span>
+            {language === "es" ? "Eliminar Puesto" : "Remove Position"}
+          </span>
+        </Button>
       </div>
     </div>
   );
