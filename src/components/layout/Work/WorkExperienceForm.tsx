@@ -26,28 +26,22 @@ export const WorkExperienceForm = ({
   const translations = WORK_TRANSLATIONS[language];
 
   return (
-    <div className="work-experience-form">
-      {workData.map((entry, index) => (
-        <WorkEntryItem
-          key={entry.id}
-          entry={entry}
-          index={index}
-          translations={translations}
-          onChange={onWorkChange}
-          onRemove={onRemoveWork}
-          language={language}
-        />
-      ))}
+    <div className="flex flex-col gap-8">
+      <div className="space-y-6">
+        {workData.map((entry, index) => (
+          <WorkEntryItem
+            key={entry.id}
+            entry={entry}
+            index={index}
+            translations={translations}
+            onChange={onWorkChange}
+            onRemove={onRemoveWork}
+            language={language}
+          />
+        ))}
+      </div>
 
-      <div
-        className="form-footer-actions"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-          marginTop: "1rem",
-        }}
-      >
+      <div className="flex flex-col gap-6 mt-4">
         <Button
           label={
             language === "es" ? "+ Agregar Experiencia" : "+ Add Experience"
@@ -55,21 +49,17 @@ export const WorkExperienceForm = ({
           onClick={onAddWork}
           variant="secondary"
           fullWidth
+          className="border-dashed border-2 py-4 bg-gray-50/50 hover:bg-white hover:border-black transition-all"
         />
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            marginTop: "1rem",
-          }}
-        >
+        <div className="flex justify-end pt-6 border-t border-gray-100">
           <Button
             label={
               language === "es" ? "Siguiente: Habilidades" : "Next: Skills"
             }
             onClick={onNextStepAction}
             variant="primary"
+            className="min-w-55 shadow-sm hover:shadow-md active:scale-95 transition-all"
           />
         </div>
       </div>

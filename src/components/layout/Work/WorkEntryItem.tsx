@@ -1,6 +1,6 @@
 import React from "react";
 import type { WorkExperienceEntry } from "../../../types/cv/Work.Experience.type";
-import { Button, DateField, Input } from "../../ui";
+import { Button, DateField, Input, TextArea } from "../../ui";
 
 interface WorkEntryItemProps {
   entry: WorkExperienceEntry;
@@ -27,17 +27,12 @@ export const WorkEntryItem = ({
   };
 
   return (
-    <div
-      className="work-entry-card"
-      style={{
-        marginBottom: "2rem",
-        padding: "1.5rem",
-        border: "1px solid #e5e7eb",
-        borderRadius: "8px",
-        backgroundColor: "#ffffff",
-      }}
-    >
-      <div className="personal-info-grid">
+    <div className="group relative bg-white border border-gray-200 rounded-xl p-6 mb-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+      <div className="absolute -left-3 -top-3 bg-black text-white w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shadow-lg">
+        {index + 1}
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
         <Input
           id={`work-company-${index}`}
           label={translations.companyLabel}
@@ -72,50 +67,37 @@ export const WorkEntryItem = ({
           onChange={handleInputChange}
           placeholder="MM / YYYY"
         />
-        <Input
-          id={`work-location-${index}`}
-          label={translations.locationLabel}
-          name="location"
-          value={entry.location}
-          onChange={handleInputChange}
-          placeholder="e.g. Mountain View, CA"
-        />
+        <div className="md:col-span-2">
+          <Input
+            id={`work-location-${index}`}
+            label={translations.locationLabel}
+            name="location"
+            value={entry.location}
+            onChange={handleInputChange}
+            placeholder="e.g. Mountain View, CA"
+          />
+        </div>
       </div>
 
-      <div style={{ marginTop: "1rem" }}>
-        <label
-          className="date-field-label"
-          style={{ display: "block", marginBottom: "0.5rem" }}
-        >
-          {translations.descriptionLabel}
-        </label>
-        <textarea
+      <div className="mt-6 pt-6 border-t border-gray-100">
+        <TextArea
+          id={`work-description-${index}`}
+          label={translations.descriptionLabel}
           name="description"
           value={entry.description}
           onChange={handleInputChange}
-          className="date-field-input"
-          style={{
-            minHeight: "120px",
-            resize: "vertical",
-            width: "100%",
-            padding: "0.75rem",
-            fontSize: "0.95rem",
-          }}
           placeholder={translations.descriptionPlaceholder}
+          enableHarvardOptimization={true}
+          rows={6}
         />
       </div>
 
-      <div
-        style={{
-          marginTop: "1.5rem",
-          display: "flex",
-          justifyContent: "flex-end",
-        }}
-      >
+      <div className="mt-6 flex justify-end">
         <Button
           label={language === "es" ? "Eliminar Puesto" : "Remove Position"}
           onClick={() => onRemove(entry.id)}
           variant="secondary"
+          className="text-red-500 border-red-100 hover:bg-red-50 hover:border-red-200"
         />
       </div>
     </div>
