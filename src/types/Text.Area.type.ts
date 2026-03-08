@@ -8,4 +8,5 @@ export interface TextAreaProps {
   id: string;
   rows?: number;
   maxLength?: number;
+  enableHarvardOptimization?: boolean;
 }
