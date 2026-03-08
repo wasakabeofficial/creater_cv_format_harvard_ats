@@ -1,4 +1,5 @@
 import Title from "./Title";
 import Label from "./Label";
-
-export { Title, Label };
+import Input from "./Input";
+import TextArea from "./TextArea";
+export { Title, Label, Input, TextArea };
