@@ -16,8 +16,11 @@ export const PersonalInfoForm = ({
   onNextStepAction,
 }: PersonalInformationFormProperties) => {
   const translations = PERSONAL_INFORMATION_TRANSLATIONS[language];
+
   const isInformationComplete =
-    data.fullName.trim() !== "" && data.email.trim() !== "";
+    data.fullName.trim() !== "" &&
+    data.email.trim() !== "" &&
+    (data.location?.trim() ?? "") !== "";
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -69,6 +72,29 @@ export const PersonalInfoForm = ({
           onChange={handleInputChange}
           placeholder={translations.locationPlaceholder}
           validationType="alphanumeric"
+          required
+        />
+
+        <Input
+          id="personal-information-linkedin"
+          label="LinkedIn URL"
+          name="linkedinUrl"
+          type="url"
+          value={data.linkedinUrl ?? ""}
+          onChange={handleInputChange}
+          placeholder="https://linkedin.com/in/tu-perfil"
+          validationType="alphanumeric"
+        />
+
+        <Input
+          id="personal-information-portfolio"
+          label="Portfolio URL"
+          name="portfolioUrl"
+          type="url"
+          value={data.portfolioUrl ?? ""}
+          onChange={handleInputChange}
+          placeholder="portfolio-personal-web.com"
+          validationType="alphanumeric"
         />
       </div>
 
@@ -80,7 +106,11 @@ export const PersonalInfoForm = ({
           variant="primary"
           className={`
             min-w-50 transition-all duration-300
-            ${!isInformationComplete ? "grayscale opacity-50" : "hover:translate-x-1"}
+            ${
+              !isInformationComplete
+                ? "grayscale opacity-50 cursor-not-allowed"
+                : "hover:translate-x-1 shadow-md shadow-black/5"
+            }
           `}
         />
       </div>
