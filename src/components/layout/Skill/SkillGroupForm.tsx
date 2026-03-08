@@ -25,57 +25,41 @@ export const SkillGroupForm = ({
   const t = SKILLS_TRANSLATIONS[language];
 
   return (
-    <div className="skill-groups-form">
-      <p
-        style={{
-          fontSize: "0.85rem",
-          color: "#6b7280",
-          marginBottom: "1.5rem",
-          fontStyle: "italic",
-        }}
-      >
+    <div className="flex flex-col gap-6">
+      <p className="text-sm text-gray-500 italic font-sans px-1">
         {t.helperText}
       </p>
 
-      {skillGroups.map((group, index) => (
-        <SkillGroupItem
-          key={group.id}
-          group={group}
-          index={index}
-          translations={t}
-          onGroupChange={onGroupChange}
-          onSkillsChange={onSkillsChange}
-          onRemove={onRemoveGroup}
-          language={language}
-        />
-      ))}
+      <div className="space-y-6">
+        {skillGroups.map((group, index) => (
+          <SkillGroupItem
+            key={group.id}
+            group={group}
+            index={index}
+            translations={t}
+            onGroupChange={onGroupChange}
+            onSkillsChange={onSkillsChange}
+            onRemove={onRemoveGroup}
+            language={language}
+          />
+        ))}
+      </div>
 
-      <div
-        className="form-footer-actions"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-          marginTop: "1.5rem",
-        }}
-      >
+      <div className="mt-8 flex flex-col gap-6">
         <Button
           label={t.addSkillGroup}
           onClick={onAddGroup}
           variant="secondary"
+          fullWidth
+          className="border-dashed border-2 py-4 hover:border-black hover:bg-gray-50 transition-all"
         />
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            marginTop: "1rem",
-          }}
-        >
+        <div className="flex justify-end pt-6 border-t border-gray-100">
           <Button
             label={t.finishLabel}
             onClick={onNextStepAction}
             variant="primary"
+            className="min-w-50 shadow-sm hover:shadow-md active:scale-95 transition-all"
           />
         </div>
       </div>
