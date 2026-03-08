@@ -8,7 +8,7 @@ export default function App() {
   return (
     <>
       <DataGuard isDirty={cvMethods.isDirty} />
-      <EditorLayout />
+      <EditorLayout methods={cvMethods} />
     </>
   );
 }

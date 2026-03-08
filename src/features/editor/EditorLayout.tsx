@@ -4,14 +4,16 @@ import { PersonalInfoForm } from "../../components/layout/Personal/PersonalInfoF
 import { EducationForm } from "../../components/layout/Education/EducationForm";
 import { WorkExperienceForm } from "../../components/layout/Work/WorkExperienceForm";
 import { SkillGroupForm } from "../../components/layout/Skill/SkillGroupForm";
-
 import { useCurriculumVitae } from "../../hooks/useCurriculumVitae";
 import { EDITOR_TRANSLATIONS } from "../../constants/ui-translations";
 import { LanguageForm } from "../../components/layout/Languages/LanguageForm";
 
 type SelectedLanguage = "en" | "es" | null;
+interface EditorLayoutProps {
+  methods: ReturnType<typeof useCurriculumVitae>;
+}
 
-export const EditorLayout = () => {
+export const EditorLayout = ({ methods }: EditorLayoutProps) => {
   const {
     cvData,
     updatePersonalInformation,
@@ -29,7 +31,7 @@ export const EditorLayout = () => {
     addLanguage,
     removeLanguage,
     isDirty,
-  } = useCurriculumVitae();
+  } = methods;
 
   const [selectedLanguage, setSelectedLanguage] =
     useState<SelectedLanguage>(null);
