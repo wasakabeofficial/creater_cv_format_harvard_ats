@@ -1,4 +1,4 @@
-import type { TextAreaProps } from "../../types/Text.Area.type";
+import type { TextAreaProps } from "../../types/ui/Text.Area.type";
 import Label from "./Label";
 import "../../assets/styles/TextArea.css";
 

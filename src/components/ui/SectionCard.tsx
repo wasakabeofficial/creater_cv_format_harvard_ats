@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../../assets/styles/SectionCard.css";
-import type { SectionCardProps } from "../../types/Section.Card.type";
+import type { SectionCardProps } from "../../types/ui/Section.Card.type";
 import Title from "./Title";
 import Button from "./Button";
 

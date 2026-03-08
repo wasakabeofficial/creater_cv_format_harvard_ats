@@ -1,4 +1,4 @@
-import type { DateFieldProps } from "../../types/Date.type";
+import type { DateFieldProps } from "../../types/ui/Date.type";
 import "../../assets/styles/DateField.css";
 import Input from "./Input";
 

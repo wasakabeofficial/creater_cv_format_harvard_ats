@@ -1,4 +1,4 @@
-import type { TableProps } from "../../types/Table.type";
+import type { TableProps } from "../../types/ui/Table.type";
 import Button from "./Button";
 import "../../assets/styles/Table.css";
 

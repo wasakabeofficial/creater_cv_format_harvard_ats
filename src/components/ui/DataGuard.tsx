@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import type { DataGuardProps } from "../../types/Data.Guard.type";
+import type { DataGuardProps } from "../../types/ui/Data.Guard.type";
 
 const DataGuard = ({
   isDirty,

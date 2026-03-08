@@ -1,5 +1,5 @@
 import "../../assets/styles/Label.css";
-import type { LabelProps } from "../../types/Label.type";
+import type { LabelProps } from "../../types/ui/Label.type";
 const Label = ({
   text,
   htmlFor,

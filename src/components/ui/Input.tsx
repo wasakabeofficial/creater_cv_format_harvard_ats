@@ -1,4 +1,4 @@
-import type { InputProps } from "../../types/Input.type";
+import type { InputProps } from "../../types/ui/Input.type";
 import "../../assets/styles/Input.css";
 import Label from "./Label";
 

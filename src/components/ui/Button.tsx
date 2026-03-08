@@ -1,4 +1,4 @@
-import type { ButtonProps } from "../../types/Button.type";
+import type { ButtonProps } from "../../types/ui/Button.type";
 import "../../assets/styles/Button.css";
 const Button = ({
   label,

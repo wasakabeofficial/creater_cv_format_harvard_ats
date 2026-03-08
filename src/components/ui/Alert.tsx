@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "../../assets/styles/Alert.css";
-import type { AlertProps } from "../../types/Alert.type";
+import type { AlertProps } from "../../types/ui/Alert.type";
 
 const Alert = ({
   message,
