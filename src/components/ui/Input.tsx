@@ -1,5 +1,5 @@
 import type { InputProps } from "../../types/ui/Input.type";
-import "../../assets/styles/Input.css";
+import "../../assets/styles/ui/Input.css";
 import Label from "./Label";
 
 const Input = ({

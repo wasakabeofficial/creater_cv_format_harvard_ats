@@ -1,5 +1,5 @@
 import type { ButtonProps } from "../../types/ui/Button.type";
-import "../../assets/styles/Button.css";
+import "../../assets/styles/ui/Button.css";
 const Button = ({
   label,
   onClick,

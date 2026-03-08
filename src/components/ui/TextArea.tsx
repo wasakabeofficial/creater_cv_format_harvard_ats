@@ -1,6 +1,6 @@
 import type { TextAreaProps } from "../../types/ui/Text.Area.type";
 import Label from "./Label";
-import "../../assets/styles/TextArea.css";
+import "../../assets/styles/ui/TextArea.css";
 
 const TextArea = ({
   label,

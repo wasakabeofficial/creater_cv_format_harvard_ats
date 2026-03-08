@@ -3,7 +3,7 @@ import { SectionCard, Title } from "../../components/ui";
 import { PersonalInfoForm } from "../../components/layout/PersonalInfoForm";
 import { useCurriculumVitae } from "../../hooks/useCurriculumVitae";
 import { EDITOR_TRANSLATIONS } from "../../constants/ui-translations";
-import "../../assets/styles/EditorLayout.css";
+import "../../assets/styles/cv/EditorLayout.css";
 import { EducationForm } from "../../components/layout/EducationForm";
 
 type SelectedLanguage = "en" | "es" | null;

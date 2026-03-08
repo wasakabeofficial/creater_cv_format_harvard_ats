@@ -1,6 +1,6 @@
 import type { TableProps } from "../../types/ui/Table.type";
 import Button from "./Button";
-import "../../assets/styles/Table.css";
+import "../../assets/styles/ui/Table.css";
 
 const Table = ({
   columns,

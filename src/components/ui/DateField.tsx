@@ -1,5 +1,5 @@
 import type { DateFieldProps } from "../../types/ui/Date.type";
-import "../../assets/styles/DateField.css";
+import "../../assets/styles/ui/DateField.css";
 
 const DateField = ({
   label,

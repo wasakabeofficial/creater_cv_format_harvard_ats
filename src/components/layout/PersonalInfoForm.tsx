@@ -1,6 +1,6 @@
 import type { PersonalInformation } from "../../types/cv/Personal.Information.type";
 import { Input, Button } from "../ui";
-import "../../assets/styles/PersonalInfoForm.css";
+import "../../assets/styles/cv/PersonalInfoForm.css";
 import { PERSONAL_INFORMATION_TRANSLATIONS } from "../../constants/ui-translations";
 
 interface PersonalInformationFormProperties {

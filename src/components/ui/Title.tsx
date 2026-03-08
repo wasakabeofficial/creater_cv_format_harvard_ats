@@ -1,4 +1,4 @@
-import "../../assets/styles/Title.css";
+import "../../assets/styles/ui/Title.css";
 import type { TitleProps } from "../../types/ui/Title.type";
 
 const Title = ({
