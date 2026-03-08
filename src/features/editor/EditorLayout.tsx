@@ -72,6 +72,7 @@ export const EditorLayout = () => {
             <PersonalInfoForm
               data={cvData.personalInformation}
               onChange={updatePersonalInformation}
+              language={selectedLanguage ?? "en"}
             />
           </div>
         </SectionCard>
