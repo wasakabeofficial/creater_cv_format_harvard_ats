@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { DateField } from "../components/ui";
+import { DateField } from "../../components/ui";
 
 describe("DateField Component", () => {
   it("renders with the correct date placeholder", () => {

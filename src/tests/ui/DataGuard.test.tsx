@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render } from "@testing-library/react";
-import { DataGuard } from "../components/ui";
+import { DataGuard } from "../../components/ui";
 
 describe("DataGuard Component", () => {
   let addEventListenerSpy: any;
