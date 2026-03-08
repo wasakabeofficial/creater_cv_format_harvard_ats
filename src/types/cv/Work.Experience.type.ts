@@ -1,9 +1,10 @@
 export interface WorkExperienceEntry {
   id: string;
   company: string;
+  position: string;
   location: string;
-  jobTitle: string;
   startDate: string;
   endDate: string;
-  achievements: string;
+  description: string;
+  highlights: string[];
 }

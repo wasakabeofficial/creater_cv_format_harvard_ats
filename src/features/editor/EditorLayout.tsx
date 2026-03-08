@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { SectionCard, Title } from "../../components/ui";
 import { PersonalInfoForm } from "../../components/layout/Personal/PersonalInfoForm";
+import { EducationForm } from "../../components/layout/Education/EducationForm";
+import { WorkExperienceForm } from "../../components/layout/Work/WorkExperienceForm";
 import { useCurriculumVitae } from "../../hooks/useCurriculumVitae";
 import { EDITOR_TRANSLATIONS } from "../../constants/ui-translations";
 import "../../assets/styles/cv/EditorLayout.css";
-import { EducationForm } from "../../components/layout/Education/EducationForm";
 
 type SelectedLanguage = "en" | "es" | null;
 
@@ -15,7 +16,9 @@ export const EditorLayout = () => {
     updateEducation,
     addEducation,
     removeEducation,
+    updateWorkExperience,
     addWorkExperience,
+    removeWorkExperience,
     isDirty,
   } = useCurriculumVitae();
 
@@ -23,6 +26,7 @@ export const EditorLayout = () => {
     useState<SelectedLanguage>(null);
   const [isEducationUnlocked, setIsEducationUnlocked] = useState(false);
   const [isWorkUnlocked, setIsWorkUnlocked] = useState(false);
+  const [, setIsSkillsUnlocked] = useState(false);
 
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -51,11 +55,12 @@ export const EditorLayout = () => {
       addWorkExperience({
         id: crypto.randomUUID(),
         company: "",
+        position: "",
         location: "",
-        jobTitle: "",
         startDate: "",
         endDate: "",
-        achievements: "",
+        description: "",
+        highlights: [],
       });
     }
   };
@@ -156,10 +161,32 @@ export const EditorLayout = () => {
                 : ""
             }
           >
-            <p className="placeholder-text">
-              {translations?.placeholder ??
-                "Please complete Education to continue..."}
-            </p>
+            {isWorkUnlocked ? (
+              <WorkExperienceForm
+                workData={cvData.workExperience}
+                onWorkChange={updateWorkExperience}
+                onRemoveWork={removeWorkExperience}
+                onAddWork={() =>
+                  addWorkExperience({
+                    id: crypto.randomUUID(),
+                    company: "",
+                    position: "",
+                    location: "",
+                    startDate: "",
+                    endDate: "",
+                    description: "",
+                    highlights: [],
+                  })
+                }
+                language={selectedLanguage ?? "en"}
+                onNextStepAction={() => setIsSkillsUnlocked(true)}
+              />
+            ) : (
+              <p className="placeholder-text">
+                {translations?.placeholder ??
+                  "Please complete Education to continue..."}
+              </p>
+            )}
           </div>
         </SectionCard>
       </main>

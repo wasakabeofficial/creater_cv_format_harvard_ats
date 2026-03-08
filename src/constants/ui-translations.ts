@@ -68,3 +68,33 @@ export const EDUCATION_TRANSLATIONS = {
     locationPlaceholder: "Ciudad de México",
   },
 };
+export const WORK_TRANSLATIONS = {
+  en: {
+    companyLabel: "Company / Organization",
+    positionLabel: "Job Title",
+    locationLabel: "Location",
+    startDateLabel: "Start Date",
+    endDateLabel: "End Date",
+    descriptionLabel: "Key Responsibilities & Achievements",
+    descriptionPlaceholder:
+      "Focus on results and impact (e.g., Increased sales by 20% by implementing...)",
+    addWorkLabel: "+ Add Experience",
+    nextStepLabel: "Next: Skills & Languages",
+    removeLabel: "Remove Position",
+    placeholder: "Please complete Education to continue...",
+  },
+  es: {
+    companyLabel: "Empresa / Organización",
+    positionLabel: "Título del Puesto",
+    locationLabel: "Ubicación",
+    startDateLabel: "Fecha de Inicio",
+    endDateLabel: "Fecha de Fin",
+    descriptionLabel: "Responsabilidades Clave y Logros",
+    descriptionPlaceholder:
+      "Enfócate en resultados e impacto (ej. Incrementé las ventas en un 20% mediante...)",
+    addWorkLabel: "+ Agregar Experiencia",
+    nextStepLabel: "Siguiente: Habilidades e Idiomas",
+    removeLabel: "Eliminar Puesto",
+    placeholder: "Por favor completa Educación para continuar...",
+  },
+};
