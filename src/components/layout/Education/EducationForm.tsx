@@ -1,6 +1,6 @@
-import { EDUCATION_TRANSLATIONS } from "../../constants/ui-translations";
-import type { EducationEntry } from "../../types/cv/Education.type";
-import { Button } from "../ui";
+import { EDUCATION_TRANSLATIONS } from "../../../constants/ui-translations";
+import type { EducationEntry } from "../../../types/cv/Education.type";
+import { Button } from "../../ui";
 import { EducationEntryItem } from "./EducationEntryItem";
 
 interface EducationFormProps {

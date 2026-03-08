@@ -1,7 +1,7 @@
 import React from "react";
-import type { EducationEntry } from "../../types/cv/Education.type";
-import { Input, Button } from "../ui";
-import DateField from "../ui/DateField";
+import type { EducationEntry } from "../../../types/cv/Education.type";
+import { Input, Button } from "../../ui";
+import DateField from "../../ui/DateField";
 
 export const EducationEntryItem = ({
   entry,
