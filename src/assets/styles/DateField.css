@@ -1,0 +1,8 @@
+.date-field-container {
+  flex: 1;
+  min-width: 140px;
+}
+.date-field-container .custom-input {
+  text-align: center;
+  letter-spacing: 1px;
+}
