@@ -1,3 +1,14 @@
+import { DataGuard } from "./components/ui";
+import { EditorLayout } from "./features";
+import { useCurriculumVitae } from "./hooks/useCurriculumVitae";
+
 export default function App() {
-  return <div>App</div>;
+  const cvMethods = useCurriculumVitae();
+
+  return (
+    <>
+      <DataGuard isDirty={cvMethods.isDirty} />
+      <EditorLayout />
+    </>
+  );
 }
