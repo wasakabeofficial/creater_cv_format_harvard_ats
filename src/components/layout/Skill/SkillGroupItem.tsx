@@ -25,7 +25,6 @@ export const SkillGroupItem = ({
 
   useEffect(() => {
     const currentGlobal = group.skills.join(", ");
-
     if (currentGlobal !== localSkills && !localSkills.trim().endsWith(",")) {
       setLocalSkills(currentGlobal);
     }
@@ -38,7 +37,7 @@ export const SkillGroupItem = ({
   };
 
   return (
-    <div className="relative bg-gray-50/50 border border-gray-200 rounded-xl p-6 transition-all duration-200 hover:border-gray-300">
+    <div className="relative bg-gray-50/50 border border-gray-200 rounded-xl p-6 transition-all duration-200 hover:border-gray-300 animate-in fade-in zoom-in-95">
       <div className="absolute -top-3 left-4 px-3 py-1 bg-gray-800 text-white text-[10px] font-bold uppercase rounded-full tracking-widest shadow-sm">
         {translations.categoryLabel || "Categoría"} #{index + 1}
       </div>
@@ -74,7 +73,7 @@ export const SkillGroupItem = ({
         <Button
           label={translations.removeGroup || "Eliminar Grupo"}
           onClick={() => onRemove(group.id)}
-          variant="secondary"
+          variant="outline"
           className="text-red-500 border-none hover:bg-red-50 text-xs py-1"
         />
       </div>
