@@ -195,7 +195,6 @@ export const PreviewLayout = ({
 
   return (
     <div className="relative flex flex-col gap-8 pb-20 items-center bg-gray-200/50 py-10 h-full">
-      {/* BARRA DE ACCIONES SUPERIOR */}
       <div className="sticky top-4 z-50 flex gap-2 bg-white/80 backdrop-blur-sm p-1.5 rounded-full shadow-md border border-gray-200 animate-slide-in">
         <button
           onClick={toggleLanguage}
@@ -204,10 +203,9 @@ export const PreviewLayout = ({
           Traducción h2: {previewLang === "en" ? "English" : "Español"}
         </button>
 
-        {/* BOTÓN DE DESCARGA PDF INTEGRADO */}
         <PDFDownloadLink
           document={<CVDocument data={data} t={t} />}
-          fileName={`CV_${personalInformation.fullName?.replace(/\s+/g, "_") || "WASAKABE"}.pdf`}
+          fileName={`CV_${personalInformation.fullName?.replace(/\s+/g, "_") || "WASAKABE"}_2026.pdf`}
         >
           {({ loading }) => (
             <button

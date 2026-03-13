@@ -145,7 +145,7 @@ export const CVDocument = ({ data, t }: CVDocumentProps) => {
 
   return (
     <Document
-      title={`CV_${personalInformation.fullName?.replace(/\s+/g, "_")}`}
+      title={`CV_${personalInformation.fullName?.replace(/\s+/g, "_")}_2026`}
     >
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
