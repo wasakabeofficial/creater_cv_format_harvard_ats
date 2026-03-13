@@ -1,68 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Times New Roman", Times, serif;
+  --font-sans: Arial, Helvetica, sans-serif;
+
+  --text-name: 16pt;
+  --text-header: 12pt;
+  --text-body: 10pt;
+
+  --color-harvard-black: #000000;
+  --color-harvard-gray: #333333;
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --font-main: "Times New Roman", Times, serif;
+  --font-alt: Arial, Helvetica, sans-serif;
+  --fs-name: 16pt;
+  --fs-header: 12pt;
+  --fs-body: 10pt;
+  --color-black: #000000;
+  --color-dark-gray: #333333;
+  --color-border: #000000;
+  --color-bg-app: #f4f4f4;
+  --color-white: #ffffff;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
-  a:hover {
-    color: #747bff;
+
+  body {
+    font-family: var(--font-main);
+    background-color: var(--color-bg-app);
+    color: var(--color-black);
+    line-height: 1.5;
+    @apply antialiased;
   }
-  button {
-    background-color: #f9f9f9;
+
+  .text-cv-name {
+    font-size: var(--fs-name);
+    font-weight: bold;
+  }
+  .text-cv-header {
+    font-size: var(--fs-header);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .text-cv-body {
+    font-size: var(--fs-body);
+    font-family: var(--font-alt);
+    font-weight: 500;
+    font-style: normal;
+  }
+}
+
+@layer utilities {
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out forwards;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

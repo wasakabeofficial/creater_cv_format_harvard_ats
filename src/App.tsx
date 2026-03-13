@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { DataGuard } from "./components/ui";
+import { EditorLayout, PreviewLayout } from "./features";
+import { useCurriculumVitae } from "./hooks/useCurriculumVitae";
+import Footer from "./components/layout/Footer/Footer";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
+  const cvMethods = useCurriculumVitae();
+  const { cvData } = cvMethods;
+  const [selectedLanguage] = useState<"en" | "es">("en");
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="flex flex-col h-screen overflow-hidden bg-white">
+      <DataGuard isDirty={cvMethods.isDirty} />
+      <main className="flex flex-1 overflow-hidden">
+        <div className="w-full md:w-1/2 h-full overflow-y-auto border-r border-gray-200 bg-gray-50/50">
+          <EditorLayout methods={cvMethods} />
+        </div>
+        <div className="hidden md:flex md:w-1/2 h-full overflow-y-auto bg-gray-200/50 justify-center p-8">
+          <div className="w-full max-w-[210mm] shadow-2xl h-fit">
+            <PreviewLayout data={cvData} language={selectedLanguage ?? "en"} />
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
 }
-
-export default App

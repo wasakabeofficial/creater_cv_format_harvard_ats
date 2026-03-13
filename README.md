@@ -1,73 +1,110 @@
-# React + TypeScript + Vite
+# Harvard CV Generator 2026 (Zero-Data Edition)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimalist resume generator designed according to the **Harvard 2026** recruitment standards, optimized for **ATS** (Applicant Tracking Systems).
 
-Currently, two official plugins are available:
+## 🛡️ Privacy by Design (Zero-Data)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is built on a philosophy of **total privacy**:
 
-## React Compiler
+- **No Database:** Your data resides exclusively in your browser's volatile memory via **Zustand**.
+- **Local Processing:** PDF generation occurs strictly on the client side using `@react-pdf/renderer`.
+- **Session Wipe:** Includes `securityUtils.wipeSessionData()` logic. When you reset the CV or refresh the page, all information is permanently deleted. We do not track, store, or monitor your personal information.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🎓 Harvard 2026 Standard
 
-## Expanding the ESLint configuration
+The design adheres to the strictest academic and professional guidelines:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Typography:** Exclusive use of standard Serif/Sans-Serif fonts (10pt - 12pt) for high-parsing accuracy.
+- **Structure:** Single-column layout for maximum compatibility with modern ATS readers.
+- **Dynamic Skills:** Organized by professional categories (e.g., Programming, Tools, Soft Skills) as demanded by the 2026 job market.
+- **Naming Convention:** Automatic file generation using the format: `CV_FullName_2026.pdf`.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Technology Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Core:** React 18 + Vite.
+- **State Management:** **Zustand** (Store-based architecture for clean, unidirectional data flow).
+- **Language:** TypeScript (Strict typing with zero abbreviations).
+- **Styles:** Tailwind CSS + CSS Variables (Precise handling of the Harvard visual identity).
+- **PDF Engine:** `@react-pdf/renderer` with internal metadata injection.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🏗️ Architecture & Directory Structure
+
+The project follows a **Feature-Based Architecture**, organized to maintain a strict separation between data logic and the Harvard visual standard.
+
+```text
+src/
+├── components/
+│   ├── layout/             # Section-specific form logic
+│   │   ├── Personal/       # Personal information forms
+│   │   ├── Work/           # Experience & professional history
+│   │   ├── Education/      # Academic background
+│   │   ├── Skill/          # Categorized skills manager
+│   │   ├── Languages/      # Multi-language proficiency
+│   │   └── Footer/         # Harvard 2026 reference footer
+│   └── ui/                 # Reusable atomic components (Button, Input, etc.)
+├── constants/              # Strategic data for Harvard standards
+│   ├── action-verbs.ts     # Curated list of high-impact verbs
+│   ├── ui-translations.ts  # Interface localization
+│   └── ...                 # English/Spanish specific verb sets
+├── features/
+│   ├── editor/             # Multi-step orchestration logic
+│   └── preview/            # Real-time synchronization
+│       └── pdf/            # CVDocument.tsx & PreviewLayout.tsx
+├── hooks/
+│   └── useCurriculumVitae.ts # Specialized Zustand state hook
+├── tests/
+│   └── ui/                 # Unit and integration test suites
+├── types/
+│   ├── cv/                 # Resume data interfaces
+│   ├── master/             # Global application types
+│   └── ui/                 # Component prop definitions
+├── App.tsx                 # Main application entry
+├── main.tsx                # React DOM render point
+└── index.css               # Harvard typography & global tokens
+
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🧱 Interface Components (Design Library)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Following our strict rule of **explicit naming (no abbreviations)**:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **`PersonalInfoForm`**: Manages contact data and professional summary.
+- **`ExperienceForm`**: Dynamic list manager for professional background with bullet point support and action verb integration.
+- **`EducationForm`**: Structured input for academic history, including GPA and field of study.
+- **`SkillsForm`**: A categorical manager allowing users to group tools and technologies (e.g., "Languages", "Frameworks").
+- **`ActionVerbs`**: Strategic constant sets that provide high-impact terminology to improve ATS scoring.
+- **`Footer`**: A high-fidelity, compact footer with 2026 compliance links (Harvard OCS, Solución Laboral Perú, and Midudev Reference).
+
+## 🚀 Installation and Use
+
+1. **Clone the repository:**
+
+```bash
+git clone git@github.com:wasakabeofficial/creater_cv_format_harvard_ats.git
+
 ```
+
+2. **Install dependencies:**
+
+```bash
+npm install
+
+```
+
+3. **Run in development mode:**
+
+```bash
+npm run dev
+
+```
+
+## 🧪 Quality and Standards
+
+- **Strict Typing:** Every interface ensures data integrity between the store and the PDF renderer.
+- **Security:** Session-based data lifecycle. No `localStorage` or `cookies` are used for sensitive information.
+- **Metadata:** Injected 2026 timestamps and author tags within the PDF binary for professional indexing.
+- **Creator Reference:** Official tool by [wasaka-be-official.vercel.app](https://www.google.com/search?q=https://wasaka-be-official.vercel.app).
+
+---
+
+2026
