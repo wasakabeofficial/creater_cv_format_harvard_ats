@@ -31,16 +31,26 @@ export const PreviewLayout = ({
   const renderContent = () => (
     <>
       <section className="text-center mb-4">
-        <h1 className="text-cv-name uppercase tracking-tight mb-1">
+        <h1
+          className="text-cv-name uppercase 
+        tracking-tight mb-1"
+        >
           {personalInformation.fullName || "Your Full Name"}
         </h1>
-        <div className="text-cv-header uppercase tracking-tight mb-2">
+        <div
+          className="text-cv-header uppercase
+         tracking-tight mb-2"
+        >
           {education.map((edu) => (
             <span>{edu.degree}</span>
           ))}
         </div>
 
-        <div className="flex justify-center flex-wrap gap-x-2 gap-y-0.5 text-cv-body border-b border-harvard-black pb-2">
+        <div
+          className="flex justify-center flex-wrap
+         gap-x-2 gap-y-0.5 text-cv-body border-b
+          border-harvard-black pb-2"
+        >
           {personalInformation.location && (
             <span>{personalInformation.location}</span>
           )}
@@ -77,24 +87,38 @@ export const PreviewLayout = ({
 
       {workExperience.length > 0 && (
         <section className="mb-4">
-          <h2 className="text-cv-header border-b border-harvard-black mb-1">
+          <h2
+            className="text-cv-header border-b
+           border-harvard-black mb-1"
+          >
             {t.workExperience}
           </h2>
           {workExperience.map((work) => (
-            <div key={work.id} className="mb-3 text-cv-body">
-              <div className="flex justify-between font-bold w-full gap-2">
-                <span className="w-80 text-left p-1">
-                  {work.company}
-                </span>
+            <div
+              key={work.id}
+              className="mb-3 
+            text-cv-body"
+            >
+              <div
+                className="flex justify-between
+               font-bold w-full gap-2"
+              >
+                <span className="w-80 text-left p-1">{work.company}</span>
                 <span className="ml-auto text-right">{work.location}</span>
               </div>
-              <div className="flex justify-between italic mb-0.5">
+              <div
+                className="flex justify-between
+               italic mb-0.5"
+              >
                 <span className="p-1">{work.position}</span>
                 <span className="not-italic">
                   {work.startDate} — {work.endDate}
                 </span>
               </div>
-              <ul className="list-disc ml-4 text-harvard-gray leading-tight">
+              <ul
+                className="list-disc ml-4 
+              text-harvard-gray leading-tight"
+              >
                 {work.description.split("\n").map((line, i) => (
                   <li key={i}>{line.replace("•", "").trim()}</li>
                 ))}
