@@ -4,92 +4,107 @@ A minimalist resume generator designed according to the **Harvard 2026** recruit
 
 ## 🛡️ Privacy by Design (Zero-Data)
 
-This project was built on a philosophy of **total privacy**:
+This project is built on a philosophy of **total privacy**:
 
-- **No Database:** The data you enter only resides in your browser's memory (React State).
-
-- **Local Processing:** PDF generation occurs strictly on the client side.
-
-- **Self-Destruction:** When you close the tab or refresh the page, all information is permanently deleted. We do not track or store your personal information.
+- **No Database:** Your data resides exclusively in your browser's volatile memory via **Zustand**.
+- **Local Processing:** PDF generation occurs strictly on the client side using `@react-pdf/renderer`.
+- **Session Wipe:** Includes `securityUtils.wipeSessionData()` logic. When you reset the CV or refresh the page, all information is permanently deleted. We do not track, store, or monitor your personal information.
 
 ## 🎓 Harvard 2026 Standard
 
 The design adheres to the strictest academic and professional guidelines:
 
-- **Typography:** Exclusive use of standard Serif/Sans-Serif fonts (10pt - 12pt).
-
-- **Structure:** Single column for maximum compatibility with ATS readers.
-
-- **Content:** Focus on action verbs and quantifiable results.
+- **Typography:** Exclusive use of standard Serif/Sans-Serif fonts (10pt - 12pt) for high-parsing accuracy.
+- **Structure:** Single-column layout for maximum compatibility with modern ATS readers.
+- **Dynamic Skills:** Organized by professional categories (e.g., Programming, Tools, Soft Skills) as demanded by the 2026 job market.
+- **Naming Convention:** Automatic file generation using the format: `CV_FullName_2026.pdf`.
 
 ## 🛠️ Technology Stack
 
-- **Core:** React 18 + Vite
-- **Language:** TypeScript (Strict typing for data integrity)
-- **Styles:** Pure CSS (Precise handling of print rules)
-- **PDF:** @react-pdf/renderer
+- **Core:** React 18 + Vite.
+- **State Management:** **Zustand** (Store-based architecture for clean, unidirectional data flow).
+- **Language:** TypeScript (Strict typing with zero abbreviations).
+- **Styles:** Tailwind CSS + CSS Variables (Precise handling of the Harvard visual identity).
+- **PDF Engine:** `@react-pdf/renderer` with internal metadata injection.
 
-## 🚀 Installation and Use
+## 🏗️ Architecture & Directory Structure
 
-1. Clone the repository:
-   ```bash
-   git clone git@github.com:wasakabeofficial/creater_cv_format_harvard_ats.git
-   ```
-
-## 🏗️ Architecture
-
-The project follows a **Feature-Based Architecture**, organized to maintain a strict separation between data logic and the Harvard visual standard:
-
-- **Modular Design:** Each core functionality (Editor, Preview, PDF Generation) is isolated, making the code easier to maintain and test.
-- **Unidirectional Data Flow:** Data flows from the `Editor` to the `App` state, and then to the `Preview`, ensuring that the "Zero-Data" policy is easy to manage from a single source of truth.
-- **Clean Logic:** Utilities for date formatting and PDF styling are decoupled from the UI components to ensure the Harvard format remains consistent.
-
-### 📂 Directory Structure
-
-- `src/features/`: Contains the core logic for the CV Editor and the Harvard Preview.
-- `src/types/`: Centralized TypeScript interfaces to ensure data integrity.
-- `src/hooks/`: Custom hooks for managing the volatile state without persistence.
-- `src/utils/`: Pure functions for PDF rendering and ATS-friendly formatting.
-
-### 🧱 Interface Components (Design Library)
-
-The system is built on a library of atomic and molecular components specifically designed for high-performance resume editing, following a strict rule of **explicit naming (no abbreviations)**:
-
-- **`SectionCard`**: A structural container that groups related fields (Experience, Education) with collapsible capabilities to optimize the editor's workspace.
-- **`TextArea` (Harvard Optimized)**: An intelligent text editor that automatically inserts bullet points (`•`) and suggests **Action Verbs** in real-time to comply with professional standards.
-- **`DateField`**: A specialized input with a validation mask for `Month / Year` formats, ensuring the chronological consistency required by recruiters.
-- **`DataGuard`**: A logical security component (_Headless_) that prevents accidental data loss when attempting to refresh or close the tab, protecting the **Zero-Persistence** policy.
-- **`Table`**: A management interface to quickly visualize and edit multiple data entries before the final generation.
-
-### 📂 Updated Directory Structure
+The project follows a **Feature-Based Architecture**, organized to maintain a strict separation between data logic and the Harvard visual standard.
 
 ```text
 src/
 ├── components/
-│   ├── ui/                 # Reusable atomic components
-│   │   ├── Button/         # Buttons with variants (Primary, Danger)
-│   │   ├── Input/          # Inputs with type validation
-│   │   ├── TextArea/       # Editor with bullet and verb logic
-│   │   ├── SectionCard/    # Resume section containers
-│   │   └── ...             # DateField, Table, Alert, DataGuard , etc
+│   ├── layout/             # Section-specific form logic
+│   │   ├── Personal/       # Personal information forms
+│   │   ├── Work/           # Experience & professional history
+│   │   ├── Education/      # Academic background
+│   │   ├── Skill/          # Categorized skills manager
+│   │   ├── Languages/      # Multi-language proficiency
+│   │   └── Footer/         # Harvard 2026 reference footer
+│   └── ui/                 # Reusable atomic components (Button, Input, etc.)
+├── constants/              # Strategic data for Harvard standards
+│   ├── action-verbs.ts     # Curated list of high-impact verbs
+│   ├── ui-translations.ts  # Interface localization
+│   └── ...                 # English/Spanish specific verb sets
 ├── features/
-│   ├── editor/             # Input form logic
-│   └── preview/            # Real-time PDF rendering
+│   ├── editor/             # Multi-step orchestration logic
+│   └── preview/            # Real-time synchronization
+│       └── pdf/            # CVDocument.tsx & PreviewLayout.tsx
 ├── hooks/
-├── test/
-├── utils/
+│   └── useCurriculumVitae.ts # Specialized Zustand state hook
+├── tests/
+│   └── ui/                 # Unit and integration test suites
 ├── types/
-│   └── ui/            # Complete interface definitions
-└── assets/
-    └── styles/             # CSS variables and global reset
-    └── images/
+│   ├── cv/                 # Resume data interfaces
+│   ├── master/             # Global application types
+│   └── ui/                 # Component prop definitions
+├── App.tsx                 # Main application entry
+├── main.tsx                # React DOM render point
+└── index.css               # Harvard typography & global tokens
 
 ```
 
-### 🧪 Quality and Testing
+## 🧱 Interface Components (Design Library)
 
-Every user interface component has been developed under a **Test-Driven Development (TDD)** methodology using:
+Following our strict rule of **explicit naming (no abbreviations)**:
 
-- **Vitest**: For high-speed unit test execution.
-- **React Testing Library**: To validate user behavior (e.g., bullet point insertion upon pressing Enter).
-- **Strict Typing**: Utilization of TypeScript interfaces to ensure zero data errors between the Editor and the PDF Generation.
+- **`PersonalInfoForm`**: Manages contact data and professional summary.
+- **`ExperienceForm`**: Dynamic list manager for professional background with bullet point support and action verb integration.
+- **`EducationForm`**: Structured input for academic history, including GPA and field of study.
+- **`SkillsForm`**: A categorical manager allowing users to group tools and technologies (e.g., "Languages", "Frameworks").
+- **`ActionVerbs`**: Strategic constant sets that provide high-impact terminology to improve ATS scoring.
+- **`Footer`**: A high-fidelity, compact footer with 2026 compliance links (Harvard OCS, Solución Laboral Perú, and Midudev Reference).
+
+## 🚀 Installation and Use
+
+1. **Clone the repository:**
+
+```bash
+git clone git@github.com:wasakabeofficial/creater_cv_format_harvard_ats.git
+
+```
+
+2. **Install dependencies:**
+
+```bash
+npm install
+
+```
+
+3. **Run in development mode:**
+
+```bash
+npm run dev
+
+```
+
+## 🧪 Quality and Standards
+
+- **Strict Typing:** Every interface ensures data integrity between the store and the PDF renderer.
+- **Security:** Session-based data lifecycle. No `localStorage` or `cookies` are used for sensitive information.
+- **Metadata:** Injected 2026 timestamps and author tags within the PDF binary for professional indexing.
+- **Creator Reference:** Official tool by [wasaka-be-official.vercel.app](https://www.google.com/search?q=https://wasaka-be-official.vercel.app).
+
+---
+
+2026

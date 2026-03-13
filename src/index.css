@@ -51,6 +51,9 @@
   }
   .text-cv-body {
     font-size: var(--fs-body);
+    font-family: var(--font-alt);
+    font-weight: 500;
+    font-style: normal;
   }
 }
 

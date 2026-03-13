@@ -2,7 +2,7 @@ export const EDITOR_TRANSLATIONS = {
   en: {
     personalInformation: "Personal Information",
     education: "Education",
-    workExperience: "Work Experience",
+    workExperience: "Professional Experience",
     skills: "Skills & Competencies",
     languages: "Languages",
     placeholder:
@@ -12,7 +12,7 @@ export const EDITOR_TRANSLATIONS = {
   es: {
     personalInformation: "Información Personal",
     education: "Educación",
-    workExperience: "Experiencia Laboral",
+    workExperience: "Experiencia Profesional",
     skills: "Habilidades y Competencias",
     languages: "Idiomas",
     placeholder:
