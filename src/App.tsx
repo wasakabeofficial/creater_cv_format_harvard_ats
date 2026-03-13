@@ -2,6 +2,7 @@ import { useState } from "react";
 import { DataGuard } from "./components/ui";
 import { EditorLayout, PreviewLayout } from "./features";
 import { useCurriculumVitae } from "./hooks/useCurriculumVitae";
+import Footer from "./components/layout/Footer/Footer";
 
 export default function App() {
   const cvMethods = useCurriculumVitae();
@@ -20,6 +21,7 @@ export default function App() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }
