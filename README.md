@@ -1,4 +1,4 @@
-# Harvard CV Generator 2026 (Zero-Data Edition)
+# Harvard CV Generator 2026 (Zero-Data Edition) - Restrructured Project
 
 A minimalist resume generator designed according to the **Harvard 2026** recruitment standards, optimized for **ATS** (Applicant Tracking Systems).
 

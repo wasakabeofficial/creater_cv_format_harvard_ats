@@ -145,7 +145,7 @@ export const LANGUAGE_SECTION_TRANSLATIONS = {
     levelLabel: "Proficiency Level",
     addLanguageLabel: "+ Add Language",
     removeLabel: "Remove Language",
-    finishLabel: "Finalize & Preview CV",
+    finishLabel: "Finalize",
     levels: {
       Native: "Native / Bilingual",
       Fluent: "Full Professional / Fluent",
@@ -165,7 +165,7 @@ export const LANGUAGE_SECTION_TRANSLATIONS = {
     levelLabel: "Nivel de Dominio",
     addLanguageLabel: "+ Agregar Idioma",
     removeLabel: "Eliminar Idioma",
-    finishLabel: "Finalizar y Previsualizar CV",
+    finishLabel: "Finalizar",
     levels: {
       Native: "Nativo / Bilingüe",
       Fluent: "Fluidez Profesional",

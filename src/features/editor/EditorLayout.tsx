@@ -7,7 +7,7 @@ import { SkillGroupForm } from "../../components/layout/Skill/SkillGroupForm";
 import { useCurriculumVitae } from "../../hooks/useCurriculumVitae";
 import { EDITOR_TRANSLATIONS } from "../../constants/ui-translations";
 import { LanguageForm } from "../../components/layout/Languages/LanguageForm";
-
+import { toast } from "react-toastify";
 type SelectedLanguage = "en" | "es" | null;
 interface EditorLayoutProps {
   methods: ReturnType<typeof useCurriculumVitae>;
@@ -100,6 +100,14 @@ export const EditorLayout = ({ methods }: EditorLayoutProps) => {
     ? EDITOR_TRANSLATIONS[selectedLanguage]
     : null;
 
+  const handleShowToast = () => {
+    const message =
+      selectedLanguage === "en"
+        ? "✨ Your CV is ready! Click the 'Download PDF' button to get the PDF."
+        : "¡Tu CV está listo! Haz clic en el botón 'Descargar PDF' para obtener el PDF.";
+
+    toast.success(message);
+  };
   return (
     <div className="min-h-screen bg-gray-50 pb-20 font-sans">
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200 px-6 py-4 mb-8">
@@ -288,9 +296,7 @@ export const EditorLayout = ({ methods }: EditorLayoutProps) => {
                 }
                 onRemoveLanguage={removeLanguage}
                 language={selectedLanguage ?? "en"}
-                onNextStepAction={() =>
-                  alert("🎉 Ready to generate your WASAKABE PDF!")
-                }
+                onNextStepAction={handleShowToast}
               />
             ) : (
               <div className="py-8 text-center border-2 border-dashed border-gray-100 rounded-xl">

@@ -10,30 +10,33 @@ import type { CurriculumVitae } from "../../../types/master/CurriculumVitae.type
 
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
+    paddingTop: 40,
+    paddingBottom: 40,
+    paddingHorizontal: 45,
     backgroundColor: "#FFFFFF",
     fontFamily: "Helvetica",
-    lineHeight: 1.2,
+    lineHeight: 1.15,
   },
 
   header: {
-    textAlign: "center",
-    marginBottom: 16,
+    alignItems: "center",
+    marginBottom: 12,
   },
 
   name: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
     textTransform: "uppercase",
-    letterSpacing: 0.5,
-    marginBottom: 2,
+    letterSpacing: 1,
+    marginBottom: 4,
   },
 
   subHeaderDegrees: {
-    fontSize: 10,
+    fontSize: 9,
     textTransform: "uppercase",
-    letterSpacing: 0.5,
-    marginBottom: 8,
+    color: "#1F2937",
+    marginBottom: 6,
+    textAlign: "center",
   },
 
   contactLine: {
@@ -41,35 +44,40 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexWrap: "wrap",
-    fontSize: 9,
-    borderBottomWidth: 1,
+    fontSize: 8.5,
+    borderBottomWidth: 0.5,
     borderBottomColor: "#000000",
-    paddingBottom: 8,
+    paddingBottom: 6,
+    width: "100%",
   },
+
   separator: {
-    marginHorizontal: 4,
-    fontWeight: "bold",
+    marginHorizontal: 6,
+    color: "#9CA3AF",
   },
 
   sectionTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: "bold",
     textTransform: "uppercase",
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.8,
     borderBottomColor: "#000000",
-    marginTop: 12,
-    marginBottom: 4,
+    marginTop: 14,
+    marginBottom: 6,
+    paddingBottom: 1,
   },
 
   entryBlock: {
-    marginBottom: 10,
+    marginBottom: 8,
   },
 
   rowBold: {
     flexDirection: "row",
     justifyContent: "space-between",
-    fontSize: 10,
+    width: "100%",
+    fontSize: 9.5,
     fontWeight: "bold",
+    marginBottom: 1,
   },
 
   rowItalic: {
@@ -77,52 +85,65 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     fontSize: 9,
     fontStyle: "italic",
-    marginBottom: 2,
+    marginBottom: 3,
+    color: "#374151",
   },
+
   companyName: {
-    width: "70%",
+    width: "50%",
+    paddingRight: 10,
     textAlign: "left",
   },
   locationText: {
-    width: "30%",
+    width: "50%",
     textAlign: "right",
+    fontWeight: "normal",
+    fontSize: 9,
   },
+
   dateText: {
     fontStyle: "normal",
+    textAlign: "right",
   },
 
   bulletRow: {
     flexDirection: "row",
-    marginBottom: 1,
-    paddingLeft: 12,
+    marginBottom: 2,
+    paddingLeft: 4,
   },
+
   bullet: {
-    width: 10,
+    width: 12,
     fontSize: 9,
+    textAlign: "center",
   },
+
   bulletContent: {
     flex: 1,
     fontSize: 9,
-    color: "#4B5563",
+    color: "#374151",
     textAlign: "justify",
+    paddingRight: 5,
   },
 
   skillRow: {
     flexDirection: "row",
-    marginBottom: 2,
+    marginBottom: 3,
     fontSize: 9,
+    lineHeight: 1.3,
   },
+
   skillCategory: {
     fontWeight: "bold",
-    textTransform: "uppercase",
-    fontSize: 8.5,
+    width: 180,
   },
 
   languageContainer: {
     flexDirection: "row",
-    flexWrap: "wrap",
     fontSize: 9,
+    marginTop: 2,
   },
+
   link: {
     color: "#000000",
     textDecoration: "none",
@@ -143,70 +164,46 @@ export const CVDocument = ({ data, t }: CVDocumentProps) => {
     languages,
   } = data;
 
+  const cleanUrl = (url: string) =>
+    url?.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+
   return (
     <Document
       title={`CV_${personalInformation.fullName?.replace(/\s+/g, "_")}_2026`}
     >
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          <Text style={styles.name}>
-            {personalInformation.fullName || "Your Full Name"}
-          </Text>
+          <Text style={styles.name}>{personalInformation.fullName}</Text>
+
           <Text style={styles.subHeaderDegrees}>
-            {education.map((edu, i) => (
-              <Text key={i}>
-                {edu.degree}
-                {i < education.length - 1 ? " | " : ""}
-              </Text>
-            ))}
+            {education.map(
+              (edu, i) =>
+                `${edu.degree}${i < education.length - 1 ? " | " : ""}`,
+            )}
           </Text>
 
           <View style={styles.contactLine}>
-            {personalInformation.location && (
-              <Text>{personalInformation.location}</Text>
-            )}
+            <Text>{personalInformation.location}</Text>
 
             {personalInformation.telephone && (
               <>
-                <Text style={styles.separator}>|</Text>
+                <Text style={styles.separator}>•</Text>
                 <Text>{personalInformation.telephone}</Text>
               </>
             )}
 
             {personalInformation.email && (
               <>
-                <Text style={styles.separator}>|</Text>
+                <Text style={styles.separator}>•</Text>
                 <Text>{personalInformation.email}</Text>
               </>
             )}
 
             {personalInformation.linkedinUrl && (
               <>
-                <Text style={styles.separator}>|</Text>
+                <Text style={styles.separator}>•</Text>
                 <Link style={styles.link} src={personalInformation.linkedinUrl}>
-                  <Text>
-                    {personalInformation.linkedinUrl.replace(
-                      /^https?:\/\/(www\.)?/,
-                      "",
-                    )}
-                  </Text>
-                </Link>
-              </>
-            )}
-
-            {personalInformation.portfolioUrl && (
-              <>
-                <Text style={styles.separator}>|</Text>
-                <Link
-                  style={styles.link}
-                  src={personalInformation.portfolioUrl}
-                >
-                  <Text>
-                    {personalInformation.portfolioUrl.replace(
-                      /^https?:\/\/(www\.)?/,
-                      "",
-                    )}
-                  </Text>
+                  {cleanUrl(personalInformation.linkedinUrl)}
                 </Link>
               </>
             )}
@@ -229,7 +226,7 @@ export const CVDocument = ({ data, t }: CVDocumentProps) => {
                   </Text>
                 </View>
                 {work.description.split("\n").map((line, i) => {
-                  const cleanLine = line.replace("•", "").trim();
+                  const cleanLine = line.replace(/^[•\-\*]/, "").trim();
                   if (!cleanLine) return null;
                   return (
                     <View key={i} style={styles.bulletRow}>
@@ -268,7 +265,7 @@ export const CVDocument = ({ data, t }: CVDocumentProps) => {
             <Text style={styles.sectionTitle}>{t.skills}</Text>
             {skillGroups.map((group) => (
               <View key={group.id} style={styles.skillRow}>
-                <Text style={styles.skillCategory}>{group.category}: </Text>
+                <Text style={styles.skillCategory}>{group.category}:</Text>
                 <Text style={{ flex: 1 }}>{group.skills.join(", ")}</Text>
               </View>
             ))}
@@ -282,9 +279,7 @@ export const CVDocument = ({ data, t }: CVDocumentProps) => {
               {languages.map((lang, index) => (
                 <Text key={lang.id}>
                   <Text style={{ fontWeight: "bold" }}>{lang.language}: </Text>
-                  <Text style={{ fontStyle: "italic" }}>
-                    {lang.proficiency}
-                  </Text>
+                  <Text>{lang.proficiency}</Text>
                   {index < languages.length - 1 ? <Text> ; </Text> : ""}
                 </Text>
               ))}

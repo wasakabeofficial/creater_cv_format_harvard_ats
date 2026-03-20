@@ -3,6 +3,7 @@ import { DataGuard } from "./components/ui";
 import { EditorLayout, PreviewLayout } from "./features";
 import { useCurriculumVitae } from "./hooks/useCurriculumVitae";
 import Footer from "./components/layout/Footer/Footer";
+import { ToastContainer } from "react-toastify";
 
 export default function App() {
   const cvMethods = useCurriculumVitae();
@@ -22,6 +23,7 @@ export default function App() {
         </div>
       </main>
       <Footer />
+      <ToastContainer />
     </div>
   );
 }
